@@ -89,6 +89,37 @@ public class Income {
                     Statement.executeUpdate();
                 }
 
+
+                        // --------- STE MONTHLY INCOME BY PRODUCT -----------//
+
+
+                Statement = connection.prepareStatement("SELECT INCOME FROM MONTHLY_INCOME_BY_PRODUCT WHERE YEAR =? AND MONTH =? AND PRODUCT_ID =?");
+                Statement.setInt(1, year);
+                Statement.setInt(2, month);
+                Statement.setInt(3, productId);
+                ResultSet monthlyIncomes = Statement.executeQuery();
+
+                if (monthlyIncomes.next()) {
+
+                    monthlyIncomeByProduct += monthlyIncomes.getFloat("INCOME");
+
+                    Statement = connection.prepareStatement("UPDATE MONTHLY_INCOME_BY_PRODUCT SET INCOME =? WHERE YEAR =? AND MONTH =? AND PRODUCT_ID =?");
+                    Statement.setFloat(1, monthlyIncomeByProduct);
+                    Statement.setInt(2, year);
+                    Statement.setInt(3, month);
+                    Statement.setInt(4, productId);
+                    Statement.executeUpdate();
+
+                }else{
+
+                    Statement = connection.prepareStatement("INSERT INTO MONTHLY_INCOME_BY_PRODUCT VALUES (?,?,?,?)");
+                    Statement.setInt(1, year);
+                    Statement.setInt(2, month);
+                    Statement.setInt(3, productId);
+                    Statement.setFloat(4, income);
+                    Statement.executeUpdate();
+                }
+
                         // --------- SET MONTHLY INCOME --------- //
                 Statement = connection.prepareStatement("SELECT INCOME FROM MONTHLY_INCOMES WHERE YEAR = ? AND MONTH = ?");
                 Statement.setInt(1, year);
