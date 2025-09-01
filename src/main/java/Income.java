@@ -143,6 +143,61 @@ public class Income {
                     Statement.executeUpdate();
                 }
 
+
+                        // ------------ SET YEARLY INCOME BY PRODUCT --------------- //
+
+
+                Statement = connection.prepareStatement("SELECT INCOME FROM YEARLY_INCOME_BY_PRODUCT WHERE YEAR =? AND PRODUCT_ID =? ");
+                Statement.setInt(1, year);
+                Statement.setInt(2, productId);
+                ResultSet YearlyIncomeByProduct = Statement.executeQuery();
+
+                if(YearlyIncomeByProduct.next()){
+
+                    yearlyIncomeByProduct += YearlyIncomeByProduct.getFloat("INCOME");
+
+                    Statement = connection.prepareStatement("UPDATE YEARLY_INCOME_BY_PRODUCT SET INCOME=? WHERE YEAR =? AND PRODUCT_ID =?");
+                    Statement.setFloat(1,yearlyIncomeByProduct);
+                    Statement.setInt(2, year);
+                    Statement.setInt(3, productId);
+                    Statement.executeUpdate();
+
+                }else{
+
+                    Statement = connection.prepareStatement("INSERT INTO YEARLY_INCOME_BY_PRODUCT VALUES (?,?,?)");
+                    Statement.setInt(1, year);
+                    Statement.setInt(2, productId);
+                    Statement.setFloat(3, income);
+                    Statement.executeUpdate();
+
+                }
+
+
+                        //  ------------- SET YEARLY INCOME ------------- //
+
+
+                Statement = connection.prepareStatement("SELECT INCOME FROM YEARLY_INCOMES WHERE YEAR =? ");
+                Statement.setInt(1, year);
+                ResultSet YearlyIncomes = Statement.executeQuery();
+
+                if(YearlyIncomes.next()){
+
+                    yearlyIncome += YearlyIncomes.getFloat("INCOME");
+
+                    Statement = connection.prepareStatement("UPDATE YEARLY_INCOMES SET INCOME=? WHERE YEAR =? ");
+                    Statement.setFloat(1, yearlyIncome);
+                    Statement.setInt(2, year);
+                    Statement.executeUpdate();
+
+                }else{
+
+                    Statement = connection.prepareStatement("INSERT INTO YEARLY_INCOMES VALUES (?,?)");
+                    Statement.setInt(1, year);
+                    Statement.setFloat(2, income);
+                    Statement.executeUpdate();
+                }
+
+
             }
             else{
                 System.out.println("Product details not found. INCOME table update fail.");
