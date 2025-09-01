@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.time.LocalDate;
 
 public class Income {
+
     Scanner scanner = new Scanner(System.in);
     Date date = new Date();
     java.sql.Date sqlDate = new java.sql.Date(date.getTime());
@@ -23,6 +24,9 @@ public class Income {
         float income;
         float monthlyIncome;
         float dailyIncome;
+        float monthlyIncomeByProduct;
+        float yearlyIncomeByProduct;
+        float yearlyIncome;
         float profit;
 
         try {
@@ -36,10 +40,14 @@ public class Income {
             ResultSet Profit = Statement.executeQuery();
 
             if (Profit.next()) {
+
                 profit = Profit.getFloat(2) - Profit.getFloat(1);
                 income = profit * quantity;
                 monthlyIncome = income;
                 dailyIncome = income;
+                monthlyIncomeByProduct = income;
+                yearlyIncomeByProduct = income;
+                yearlyIncome = income;
 
 
                     // ----------SET DAILY INCOME BY PRODUCT------------- //
@@ -53,6 +61,7 @@ public class Income {
                 if (Income.next()) {
 
                     income += Income.getFloat("INCOME");
+
                     Statement = connection.prepareStatement("UPDATE INCOME SET INCOME=? WHERE PRODUCT_ID=? AND DATE =?");
                     Statement.setFloat(1, income);
                     Statement.setInt(2, productId);
@@ -61,6 +70,7 @@ public class Income {
                 }
                 else{
                     Statement = connection.prepareStatement("INSERT INTO INCOME VALUES (?,?,?)");
+
                     Statement.setDate(1, sqlDate);
                     Statement.setInt(2, productId);
                     Statement.setFloat(3, income);
@@ -77,10 +87,12 @@ public class Income {
                 if (dailyIncomes.next()) {
 
                     dailyIncome += dailyIncomes.getFloat("INCOME");
+
                     Statement = connection.prepareStatement("UPDATE DAILY_INCOMES SET INCOME = ? WHERE DATE =?");
                     Statement.setFloat(1, dailyIncome);
                     Statement.setDate(2, sqlDate);
                     Statement.executeUpdate();
+
                 } else{
 
                     Statement = connection.prepareStatement("INSERT INTO DAILY_INCOMES VALUES (?,?)");
@@ -121,6 +133,8 @@ public class Income {
                 }
 
                         // --------- SET MONTHLY INCOME --------- //
+
+
                 Statement = connection.prepareStatement("SELECT INCOME FROM MONTHLY_INCOMES WHERE YEAR = ? AND MONTH = ?");
                 Statement.setInt(1, year);
                 Statement.setInt(2, month);
@@ -129,11 +143,13 @@ public class Income {
                 if (MonthlyIncome.next()) {
 
                     monthlyIncome += MonthlyIncome.getFloat("INCOME");
+
                     Statement = connection.prepareStatement("UPDATE MONTHLY_INCOMES SET INCOME=? WHERE YEAR = ? AND MONTH = ?");
                     Statement.setFloat(1, monthlyIncome);
                     Statement.setInt(2, year);
                     Statement.setInt(3, month);
                     Statement.executeUpdate();
+
                 }else{
 
                     Statement = connection.prepareStatement("INSERT INTO MONTHLY_INCOMES VALUES (?,?,?)");
