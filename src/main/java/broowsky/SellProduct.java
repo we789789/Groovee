@@ -1,3 +1,5 @@
+package broowsky;
+
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -50,7 +52,7 @@ public class SellProduct {
                             float sellingPrice = price.getFloat("SELLING_PRICE");
                             sale.setPrice(sale.getQuantity(), sellingPrice);
                         } else {
-                            System.out.println("Product not found.");
+                            System.out.println("broowsky.Product not found.");
                         }
 
 

@@ -1,3 +1,5 @@
+package broowsky;
+
 import java.sql.*;
 import java.util.Date;
 import java.util.Scanner;
@@ -216,7 +218,7 @@ public class Income {
 
             }
             else{
-                System.out.println("Product details not found. INCOME table update fail.");
+                System.out.println("broowsky.Product details not found. INCOME table update fail.");
             }
 
         } catch (Exception e) {

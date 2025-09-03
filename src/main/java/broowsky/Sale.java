@@ -1,3 +1,5 @@
+package broowsky;
+
 import java.util.Scanner;
 
 public class Sale {
