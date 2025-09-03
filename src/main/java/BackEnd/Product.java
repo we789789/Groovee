@@ -1,6 +1,4 @@
-package broowsky;
-
-import java.util.Scanner;
+package BackEnd;
 
 public class Product{
     private int productId;
@@ -14,6 +12,22 @@ public class Product{
         this.productName = productName;
         this.purchasePrice = purchasePrice;
         this.sellingPrice = sellingPrice;
+        this.quantity = quantity;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+    public void setPurchasePrice(float purchasePrice) {
+        this.purchasePrice = purchasePrice;
+    }
+    public void setSellingPrice(float sellingPrice) {
+        this.sellingPrice = sellingPrice;
+    }
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 

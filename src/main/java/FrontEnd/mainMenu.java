@@ -1,6 +1,7 @@
 package FrontEnd;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import javafx.animation.FadeTransition;
@@ -47,7 +48,6 @@ public class mainMenu {
 
     @FXML
     void btn_getDailyIncomes(ActionEvent event) {
-
     }
 
     @FXML
@@ -78,6 +78,28 @@ public class mainMenu {
     @FXML
     void initialize() {
 
+    }
+
+    public void btn_productDetails(ActionEvent actionEvent) {
+
+        try {
+            Parent addProductView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/ProductDetails.fxml")));
+            mainPanel.getChildren().setAll(addProductView);
+
+            AnchorPane.setTopAnchor(addProductView, 0.0);
+            AnchorPane.setBottomAnchor(addProductView, 0.0);
+            AnchorPane.setLeftAnchor(addProductView, 0.0);
+            AnchorPane.setRightAnchor(addProductView, 0.0);
+
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(500), addProductView);
+            fadeIn.setFromValue(0.0);
+            fadeIn.setToValue(1.0);
+            fadeIn.play();
+
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
 }

@@ -9,19 +9,25 @@
 
 <AnchorPane fx:id="mainPanel" prefHeight="649.0" prefWidth="996.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.AddProduct">
    <children>
-      <TextField fx:id="txt_productId" layoutX="117.0" layoutY="55.0" prefHeight="37.0" prefWidth="282.0" promptText="Product ID" />
-      <TextField fx:id="txt_productName" layoutX="117.0" layoutY="108.0" prefHeight="37.0" prefWidth="282.0" promptText="Product Name" />
-      <TextField fx:id="txt_purchasePrice" layoutX="117.0" layoutY="161.0" prefHeight="37.0" prefWidth="282.0" promptText="Purchasing Price" />
-      <TextField fx:id="txt_sellingPrice" layoutX="117.0" layoutY="214.0" prefHeight="37.0" prefWidth="282.0" promptText="Selling Price" />
-      <TextField fx:id="txt_quantity" layoutX="116.0" layoutY="267.0" prefHeight="37.0" prefWidth="282.0" promptText="Quantity" />
-      <Button layoutX="132.0" layoutY="338.0" mnemonicParsing="false" onAction="#btn_addProduct" prefHeight="37.0" prefWidth="247.0" text="Add Product" />
-      <Label fx:id="lbl_Success" layoutX="87.0" layoutY="413.0" prefHeight="25.0" prefWidth="343.0" textAlignment="CENTER" />
-      <TableView layoutX="465.0" layoutY="46.0" prefHeight="584.0" prefWidth="512.0">
+      <TextField fx:id="txt_productId" layoutX="150.0" layoutY="55.0" prefHeight="37.0" prefWidth="282.0" promptText="Product ID" />
+      <TextField fx:id="txt_productName" layoutX="150.0" layoutY="108.0" prefHeight="37.0" prefWidth="282.0" promptText="Product Name" />
+      <TextField fx:id="txt_purchasePrice" layoutX="150.0" layoutY="161.0" prefHeight="37.0" prefWidth="282.0" promptText="Purchasing Price" />
+      <TextField fx:id="txt_sellingPrice" layoutX="150.0" layoutY="214.0" prefHeight="37.0" prefWidth="282.0" promptText="Selling Price" />
+      <TextField fx:id="txt_quantity" layoutX="149.0" layoutY="267.0" prefHeight="37.0" prefWidth="282.0" promptText="Quantity" />
+      <Label fx:id="lbl_Success" contentDisplay="CENTER" layoutX="117.0" layoutY="359.0" prefHeight="25.0" prefWidth="312.0" style="-fx-font-color: #00ff12; -fx-text-alignment: center;" textAlignment="CENTER" textFill="#00ff12" />
+      <TableView fx:id="tbl_addProduct" layoutX="516.0" layoutY="46.0" prefHeight="545.0" prefWidth="461.0">
         <columns>
-          <TableColumn editable="false" prefWidth="154.0" text="Product ID" />
-          <TableColumn editable="false" prefWidth="350.0" sortable="false" text="Product Name" />
+          <TableColumn fx:id="col_productID" editable="false" prefWidth="154.0" text="Product ID" />
+          <TableColumn fx:id="col_productName" editable="false" prefWidth="357.0" text="Product Name" />
         </columns>
       </TableView>
-      <Button layoutX="117.0" layoutY="550.0" mnemonicParsing="false" onAction="#btn_mainMenu" prefHeight="37.0" prefWidth="282.0" text="Main Menu" textAlignment="CENTER" />
+      <Button layoutX="117.0" layoutY="550.0" mnemonicParsing="false" onAction="#btn_mainMenu" prefHeight="37.0" prefWidth="282.0" style="-fx-background-color: #169bee;" text="Main Menu" textAlignment="CENTER" textFill="WHITE" />
+      <Button layoutX="117.0" layoutY="479.0" mnemonicParsing="false" onAction="#btn_addProduct" prefHeight="37.0" prefWidth="282.0" style="-fx-background-color: #169bee;" text="Add Product" textAlignment="CENTER" textFill="WHITE" />
+      <Label layoutX="17.0" layoutY="65.0" prefHeight="18.0" prefWidth="70.0" text="Product ID :" />
+      <Label layoutX="17.0" layoutY="118.0" text="Product Name :" />
+      <Label layoutX="14.0" layoutY="171.0" text="Purchasing Price :" />
+      <Label layoutX="14.0" layoutY="224.0" text="Selling Price :" />
+      <Label layoutX="14.0" layoutY="277.0" text="Quantity :" />
+      <Label fx:id="lbl_fail" contentDisplay="CENTER" layoutX="121.0" layoutY="395.0" prefHeight="25.0" prefWidth="312.0" style="-fx-font-color: #ff0000; -fx-text-alignment: center;" textAlignment="CENTER" textFill="RED" />
    </children>
 </AnchorPane>

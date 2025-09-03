@@ -1,4 +1,4 @@
-package broowsky;
+package BackEnd;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -6,8 +6,13 @@ import java.util.Date;
 import java.util.Scanner;
 
 
-public class AddProduct {
+public class AddProductController {
 
+    public static ArrayList<Product> productList = new ArrayList<>();
+
+    static {
+        setProductList();
+    }
 
     public static String addProduct(int productID, String productName, float sellingPrice, float purchasePrice, int quantity) {
 
@@ -55,7 +60,7 @@ public class AddProduct {
                 Statement.setInt(2, quantity);
                 Statement.executeUpdate();
 
-
+            setProductList();
 
         } catch (Exception e) {
             System.out.println(e);
@@ -64,7 +69,8 @@ public class AddProduct {
         return output;
     }
 
-    public static void getData(){
+    public static void setProductList(){
+        productList.clear();
 
         String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
         String user = "root";
@@ -74,8 +80,6 @@ public class AddProduct {
         float sellingPrice;
         float purchasePrice;
         int quantity;
-
-        ArrayList<Product> productList = new ArrayList();
 
         try{
 
@@ -87,12 +91,12 @@ public class AddProduct {
             ResultSet products = Statement.executeQuery();
 
             while(products.next()){
-                productID = products.getInt("productID");
-                productName = products.getString("productName");
-                sellingPrice = products.getFloat("sellingPrice");
-                purchasePrice = products.getFloat("purchasePrice");
+                productID = products.getInt("PRODUCT_ID");
+                productName = products.getString("Name");
+                sellingPrice = products.getFloat("SELLING_Price");
+                purchasePrice = products.getFloat("PURCHASE_Price");
 
-                Statement = connection.prepareStatement("SELECT QUANTITY FROM STOCK WHERE productID = ?");
+                Statement = connection.prepareStatement("SELECT QUANTITY FROM STOCK WHERE PRODUCT_ID = ?");
                 Statement.setInt(1, productID);
                 ResultSet stock = Statement.executeQuery();
 
@@ -104,14 +108,15 @@ public class AddProduct {
 
                 productList.add(new Product(productID, productName, purchasePrice, sellingPrice, quantity));
             }
-
             Statement.close();
             connection.close();
-
 
         }catch(Exception e){
             System.out.println(e);
         }
+    }
 
+    public static ArrayList<Product> getProductList() {
+        return productList;
     }
 }

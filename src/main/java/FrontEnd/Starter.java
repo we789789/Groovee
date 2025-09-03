@@ -1,6 +1,6 @@
 package FrontEnd;
 
-import broowsky.App;
+import BackEnd.App;
 
 public class Starter {
     public static void main(String[] args) {
