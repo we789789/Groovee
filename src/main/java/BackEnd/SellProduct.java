@@ -10,7 +10,7 @@ public class SellProduct {
 
         Scanner scanner = new Scanner(System.in);
         Date date = new Date();
-        Income income = new Income();
+        SetIncome income = new SetIncome();
 
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         PreparedStatement Statement;

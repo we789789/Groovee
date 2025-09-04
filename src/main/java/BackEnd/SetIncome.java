@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Scanner;
 import java.time.LocalDate;
 
-public class Income {
+public class SetIncome {
 
     Scanner scanner = new Scanner(System.in);
     Date date = new Date();
