@@ -1,4 +1,6 @@
-package BackEnd;
+package Controller;
+
+import BackEnd.Product;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -4,9 +4,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import BackEnd.AddProductController;
 import BackEnd.Product;
-import BackEnd.ProductDetailsController;
+import Controller.ProductDetailsController;
 import javafx.animation.FadeTransition;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,9 +21,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
-import javax.lang.model.type.NullType;
-
-import static BackEnd.ProductDetailsController.setProductList;
+import static Controller.ProductDetailsController.setProductList;
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class ProductDetails {
@@ -34,7 +31,7 @@ public class ProductDetails {
     public TableColumn<Product, String> col_productName;
     public TableColumn<Product, Float> col_purchasingPrice;
     public TableColumn<Product, Float> col_sellingPrice;
-    public TableColumn<Product, Integer> col_quantity;
+    public TableColumn <Product, Integer> col_quantity;
 
     ArrayList<Product> products;
 
@@ -131,6 +128,7 @@ public class ProductDetails {
         col_purchasingPrice.setCellValueFactory(new PropertyValueFactory<>("purchasePrice"));
         col_sellingPrice.setCellValueFactory(new PropertyValueFactory<>("sellingPrice"));
         col_quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+
     }
 
     @FXML

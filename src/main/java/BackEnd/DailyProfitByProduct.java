@@ -2,14 +2,17 @@ package BackEnd;
 
 import java.time.LocalDate;
 
-public class DailyIncomeByProduct extends Product {
+public class DailyProfitByProduct extends Product {
 
     LocalDate date;
     float income;
 
-    public DailyIncomeByProduct(int productID, String productName, float purchasePrice, float sellingPrice, int quantity) {
+    public DailyProfitByProduct(int productID, String productName, float purchasePrice, float sellingPrice, int quantity, LocalDate date, float income) {
         super(productID, productName, purchasePrice, sellingPrice, quantity);
+        this.date = date;
+        this.income = income;
     }
+
 
     public LocalDate getDate() {
         return date;

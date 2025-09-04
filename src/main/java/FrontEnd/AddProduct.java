@@ -4,7 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import BackEnd.AddProductController;
+import Controller.AddProductController;
 import BackEnd.Product;
 import javafx.animation.FadeTransition;
 import javafx.collections.ObservableList;
@@ -20,8 +20,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
-import static BackEnd.AddProductController.addProduct;
-import static BackEnd.AddProductController.setProductList;
+import static Controller.AddProductController.addProduct;
+import static Controller.AddProductController.setProductList;
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class AddProduct {
