@@ -1,6 +1,7 @@
 package FrontEnd;
 
 import BackEnd.DailyProfitByProduct;
+import BackEnd.Product;
 import javafx.animation.FadeTransition;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -185,6 +186,7 @@ public class incomesByProductDaily {
         assert mainPanel != null : "fx:id=\"mainPanel\" was not injected: check your FXML file 'DailyProfitByProduct.fxml'.";
         assert tbl_dailyProfit != null : "fx:id=\"tbl_dailyProfit\" was not injected: check your FXML file 'DailyProfitByProduct.fxml'.";
         assert txt_searchField != null : "fx:id=\"txt_searchField\" was not injected: check your FXML file 'DailyProfitByProduct.fxml'.";
+
 
 
         refreshDailyIncomeByProduct();

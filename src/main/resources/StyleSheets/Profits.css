@@ -1,0 +1,74 @@
+.table-row-cell {
+    -fx-padding: 3px 0;
+    -fx-background-insets: 0, 3;
+    -fx-border-color: transparent;
+}
+.table-row-cell:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.1);
+    -fx-background-radius: 2px;
+}
+.button{
+    -fx-cursor: hand;
+    -fx-background-radius: 5px;
+    -fx-background-color: #1c1c3c;
+    -fx-border-color: white;
+    -fx-border-radius: 5px;
+}
+.button:hover{
+    -fx-background-color: rgba(0, 0, 0, 0.1);
+}
+
+.table-view .column-header{
+    -fx-background-color: #1c1c3c;
+}
+
+.table-view .column-header .label{
+    -fx-text-fill: white;
+    -fx-text-size: 17;
+    -fx-font-family: Segoe UI;
+    -fx-alignment: left;
+    -fx-padding:  10 0 10 0;
+    -fx-border-color: rgba(0,0,0,0.2);
+}
+
+.table-view {
+    -fx-background-color: transparent;
+    -fx-control-inner-background: transparent;
+    -fx-table-cell-border-color: transparent;
+    -fx-selection-bar-non-focused: transparent;
+}
+.table-row-cell:selected {
+    -fx-background-color: rgba(0,0,0,0.1);
+    -fx-text-fill: white;
+}
+.table-cell {
+    -fx-padding: 1 0 1 0;
+    -fx-border-width: 1px;
+    -fx-border-color: rgba(0,0,0,0.2);
+}
+.scroll-bar:vertical,
+.scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+.scroll-bar:vertical,
+.scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+.scroll-bar .track,
+.scroll-bar .track-background,
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: rgba(0,0,0,0.1);
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 5;
+}
+.scroll-bar{
+    -fx-opacity: 0;
+}
+.scroll-bar:hover {
+    -fx-opacity: 1;
+}
+

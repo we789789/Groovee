@@ -9,11 +9,24 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 public class mainMenu {
 
+    public AnchorPane mainFrame;
+    public Button btn1;
+    public Button btn2;
+    public Button btn3;
+    public Button btn4;
+    public Button btn5;
+    public Button btn6;
+    public Button btn7;
+    public Button btn8;
+    public Button btn9;
+    public Label lbl;
     @FXML
     private ResourceBundle resources;
 

@@ -11,36 +11,35 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPanel" prefHeight="649.0" prefWidth="996.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.incomesByProductMonthly">
+<AnchorPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725" prefWidth="1113.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.incomesByProductMonthly">
     <children>
-        <TableView fx:id="tbl_monthlyProfit" layoutX="13.0" layoutY="114.0" prefHeight="466.0" prefWidth="970.0">
+        <TableView fx:id="tbl_monthlyProfit" layoutX="13.0" layoutY="114.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="1086.0" stylesheets="@../StyleSheets/Profits.css">
             <columns>
             <TableColumn fx:id="col_monthlyProfitYear" prefWidth="103.0" text="Year" />
-                <TableColumn fx:id="col_monthlyProfitMonth" prefWidth="56.0" text="Month" />
-                <TableColumn fx:id="col_monthlyProfitProductID" prefWidth="116.0" text="Product ID" />
-                <TableColumn fx:id="col_monthlyProfitProductName" prefWidth="315.0" text="Product Name" />
-                <TableColumn fx:id="col_monthlyProfitPurchasingPrice" prefWidth="135.0" text="Purchasing Price" />
-                <TableColumn fx:id="col_monthlyProfitSellingPrice" prefWidth="132.0" text="Selling Price" />
-                <TableColumn fx:id="col_monthlyProfit" prefWidth="112.0" text="Profit" />
+                <TableColumn fx:id="col_monthlyProfitMonth" prefWidth="72.0" text="Month" />
+                <TableColumn fx:id="col_monthlyProfitProductID" prefWidth="133.0" text="Product ID" />
+                <TableColumn fx:id="col_monthlyProfitProductName" prefWidth="375.0" text="Product Name" />
+                <TableColumn fx:id="col_monthlyProfitPurchasingPrice" prefWidth="134.0" text="Purchasing Price" />
+                <TableColumn fx:id="col_monthlyProfitSellingPrice" prefWidth="131.0" text="Selling Price" />
+                <TableColumn fx:id="col_monthlyProfit" prefWidth="136.0" text="Profit" />
             </columns>
         </TableView>
-        <Button layoutX="21.0" layoutY="23.0" mnemonicParsing="false" onAction="#btn_MainMenu" prefHeight="41.0" prefWidth="270.0" style="-fx-background-color: #169bee; -fx-border-radius: 10px;" text="Main Menu" textAlignment="CENTER" textFill="WHITE" />
-        <TextField fx:id="txt_searchField" layoutX="471.0" layoutY="23.0" onKeyReleased="#search" prefHeight="41.0" prefWidth="512.0" promptText="Search Products" />
-        <Label layoutX="615.0" layoutY="597.0" prefHeight="30.0" prefWidth="97.0" text="Total Profit :">
+        <TextField fx:id="txt_searchField" layoutX="477.0" layoutY="23.0" onKeyReleased="#search" prefHeight="41.0" prefWidth="512.0" promptText="       Search Products  🔍 " style="-fx-background-color: transperent; -fx-text-fill: white; -fx-border-color: white; -fx-background-radius: 30px; -fx-border-radius: 30px;" />
+        <Label layoutX="615.0" layoutY="678.0" prefHeight="30.0" prefWidth="97.0" text="Total Profit :" textFill="WHITE">
+            <font>
+                <Font name="Segoe UI" size="17.0" />
+            </font>
+        </Label>
+        <Label fx:id="lbl_monthlyProfit" layoutX="731.0" layoutY="677.0" prefHeight="25.0" prefWidth="237.0" textFill="#04ff00">
             <font>
                 <Font size="16.0" />
             </font>
         </Label>
-        <Label fx:id="lbl_monthlyProfit" layoutX="712.0" layoutY="599.0" prefHeight="25.0" prefWidth="237.0" textFill="#04ff00">
-            <font>
-                <Font size="16.0" />
-            </font>
-        </Label>
-      <ButtonBar layoutX="35.0" layoutY="592.0" prefHeight="40.0" prefWidth="359.0" style="align-items: center;">
+      <ButtonBar layoutX="45.0" layoutY="670.0" prefHeight="40.0" prefWidth="359.0" style="align-items: center;">
         <buttons>
-            <Button mnemonicParsing="false" onMouseReleased="#btnYearly" prefHeight="30.0" prefWidth="145.0" style="-fx-background-color: #169bee;" text="Yearly" textFill="WHITE" />
-            <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="162.0" style="-fx-background-color: #2d3af8;" text="Monthly" textAlignment="CENTER" textFill="WHITE" />
-          <Button mnemonicParsing="false" onMouseReleased="#btnDaily" prefHeight="30.0" prefWidth="162.0" style="-fx-background-color: #169bee;" text="Daily" />
+            <Button mnemonicParsing="false" onMouseReleased="#btnYearly" prefHeight="30.0" prefWidth="145.0" stylesheets="@../StyleSheets/Profits.css" text="Yearly" textFill="WHITE" />
+            <Button disable="true" mnemonicParsing="false" prefHeight="32.0" prefWidth="162.0" stylesheets="@../StyleSheets/Profits.css" text="Monthly" textAlignment="CENTER" textFill="WHITE" />
+          <Button mnemonicParsing="false" onMouseReleased="#btnDaily" prefHeight="30.0" prefWidth="162.0" stylesheets="@../StyleSheets/Profits.css" text="Daily" textFill="WHITE" />
         </buttons>
          <opaqueInsets>
             <Insets />
