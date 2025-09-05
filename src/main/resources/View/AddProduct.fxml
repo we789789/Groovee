@@ -10,27 +10,27 @@
 
 <AnchorPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="1113.0" stylesheets="@../StyleSheets/AddProduct.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.AddProduct">
    <children>
-      <TextField fx:id="txt_productId" layoutX="150.0" layoutY="55.0" prefHeight="37.0" prefWidth="282.0" promptText="Product ID" style="-fx-background-color: #1c1c3c; -fx-text-fill: white;">
+      <TextField fx:id="txt_productId" layoutX="150.0" layoutY="100.0" prefHeight="37.0" prefWidth="282.0" promptText="Product ID" style="-fx-background-color: #1c1c3c; -fx-text-fill: white;">
          <font>
             <Font name="Segoe UI" size="15.0" />
          </font></TextField>
-      <TextField fx:id="txt_productName" layoutX="150.0" layoutY="108.0" prefHeight="37.0" prefWidth="282.0" promptText="Product Name" style="-fx-background-color: #1c1c3c; -fx-text-fill: white;">
+      <TextField fx:id="txt_productName" layoutX="150.0" layoutY="153.0" prefHeight="37.0" prefWidth="282.0" promptText="Product Name" style="-fx-background-color: #1c1c3c; -fx-text-fill: white;">
          <font>
             <Font name="Segoe UI" size="15.0" />
          </font></TextField>
-      <TextField fx:id="txt_purchasePrice" layoutX="150.0" layoutY="161.0" prefHeight="37.0" prefWidth="282.0" promptText="Purchasing Price" style="-fx-background-color: #1c1c3c; -fx-text-fill: white;">
+      <TextField fx:id="txt_purchasePrice" layoutX="150.0" layoutY="206.0" prefHeight="37.0" prefWidth="282.0" promptText="Purchasing Price" style="-fx-background-color: #1c1c3c; -fx-text-fill: white;">
          <font>
             <Font size="15.0" />
          </font></TextField>
-      <TextField fx:id="txt_sellingPrice" layoutX="150.0" layoutY="214.0" prefHeight="37.0" prefWidth="282.0" promptText="Selling Price" style="-fx-background-color: #1c1c3c; -fx-text-fill: white;">
+      <TextField fx:id="txt_sellingPrice" layoutX="150.0" layoutY="259.0" prefHeight="37.0" prefWidth="282.0" promptText="Selling Price" style="-fx-background-color: #1c1c3c; -fx-text-fill: white;">
          <font>
             <Font size="15.0" />
          </font></TextField>
-      <TextField fx:id="txt_quantity" layoutX="149.0" layoutY="267.0" prefHeight="37.0" prefWidth="282.0" promptText="Quantity" style="-fx-background-color: #1c1c3c; -fx-text-fill: white;">
+      <TextField fx:id="txt_quantity" layoutX="149.0" layoutY="312.0" prefHeight="37.0" prefWidth="282.0" promptText="Quantity" style="-fx-background-color: #1c1c3c; -fx-text-fill: white;">
          <font>
             <Font size="15.0" />
          </font></TextField>
-      <Label fx:id="lbl_Success" contentDisplay="CENTER" layoutX="150.0" layoutY="358.0" prefHeight="25.0" prefWidth="282.0" style="-fx-font-color: #00ff12; -fx-text-alignment: center;" textAlignment="CENTER" textFill="#00ff12" />
+      <Label fx:id="lbl_Success" contentDisplay="CENTER" layoutX="149.0" layoutY="529.0" prefHeight="25.0" prefWidth="282.0" style="-fx-font-color: #00ff12; -fx-text-alignment: center;" textAlignment="CENTER" textFill="#00ff12" />
       <TableView fx:id="tbl_addProduct" layoutX="455.0" layoutY="45.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="664.0" prefWidth="638.0" stylesheets="@../StyleSheets/AddProduct.css">
         <columns>
           <TableColumn fx:id="col_productID" editable="false" prefWidth="169.0" resizable="false" text="Product ID" />
@@ -40,30 +40,35 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button layoutX="149.0" layoutY="453.0" mnemonicParsing="false" onAction="#btn_addProduct" prefHeight="37.0" prefWidth="282.0" style="-fx-background-color: #1c1c3c; -fx-background-radius: 5px; -fx-border-color: white; -fx-border-radius: 5px; -fx-border-width: 1px;" text="Add Product" textAlignment="CENTER" textFill="WHITE">
+      <Button layoutX="149.0" layoutY="421.0" mnemonicParsing="false" onAction="#btn_addProduct" prefHeight="37.0" prefWidth="282.0" style="-fx-background-color: #1c1c3c; -fx-background-radius: 5px; -fx-border-color: white; -fx-border-radius: 5px; -fx-border-width: 1px;" stylesheets="@../StyleSheets/AddProduct.css" text="Add Product" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font></Button>
-      <Label layoutX="17.0" layoutY="65.0" prefHeight="26.0" prefWidth="107.0" text="Product ID :" textFill="WHITE">
+      <Label layoutX="17.0" layoutY="110.0" prefHeight="26.0" prefWidth="107.0" text="Product ID :" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font></Label>
-      <Label layoutX="17.0" layoutY="118.0" text="Product Name :" textFill="WHITE">
+      <Label layoutX="17.0" layoutY="163.0" text="Product Name :" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font></Label>
-      <Label layoutX="14.0" layoutY="171.0" prefHeight="26.0" prefWidth="140.0" text="Purchasing Price :" textFill="WHITE">
+      <Label layoutX="14.0" layoutY="216.0" prefHeight="26.0" prefWidth="140.0" text="Purchasing Price :" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font></Label>
-      <Label layoutX="14.0" layoutY="224.0" text="Selling Price :" textFill="WHITE">
+      <Label layoutX="14.0" layoutY="269.0" text="Selling Price :" textFill="WHITE">
          <font>
             <Font name="Segoe UI" size="15.0" />
          </font></Label>
-      <Label layoutX="14.0" layoutY="277.0" text="Quantity :" textFill="WHITE">
+      <Label layoutX="14.0" layoutY="322.0" text="Quantity :" textFill="WHITE">
          <font>
             <Font name="Segoe UI" size="15.0" />
          </font></Label>
-      <Label fx:id="lbl_fail" contentDisplay="CENTER" layoutX="149.0" layoutY="395.0" prefHeight="25.0" prefWidth="282.0" style="-fx-font-color: #ff0000; -fx-text-alignment: center;" textAlignment="CENTER" textFill="RED" />
+      <Label fx:id="lbl_fail" contentDisplay="CENTER" layoutX="150.0" layoutY="529.0" prefHeight="25.0" prefWidth="282.0" style="-fx-font-color: #ff0000; -fx-text-alignment: center;" textAlignment="CENTER" textFill="RED" />
+      <Button layoutX="150.0" layoutY="468.0" mnemonicParsing="false" onAction="#btn_clearProduct" prefHeight="37.0" prefWidth="282.0" style="-fx-background-color: #1c1c3c; -fx-background-radius: 5px; -fx-border-color: white; -fx-border-radius: 5px; -fx-border-width: 1px;" stylesheets="@../StyleSheets/AddProduct.css" text="Clear" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

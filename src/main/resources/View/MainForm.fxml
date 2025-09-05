@@ -6,14 +6,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainFrame" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="1527.0" style="-fx-background-color: #1c1c3c;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.mainMenu">
-   <Label fx:id="lbl" layoutX="35.0" layoutY="25.0" prefHeight="76.0" prefWidth="332.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20px;" text=" GROOVEE">
-      <font>
-         <Font name="Forte" size="67.0" />
-      </font>
-   </Label>
+<AnchorPane fx:id="mainFrame" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="791.0" prefWidth="1560.0" style="-fx-background-color: #1c1c3c;" styleClass="main-frame" stylesheets="@../StyleSheets/MainPanel.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.mainMenu">
    <!--suppress XmlDuplicatedId -->
-   <Button layoutX="64.0" layoutY="140.0" mnemonicParsing="false" onAction="#btn_addProduct" prefHeight="35.0" prefWidth="281.0" style="-fx-background-color: rgba(0,0,0,0.1); -fx-border-color: white; -fx-border-radius: 10px;" text="Add Products" textFill="WHITE">
+   <Button layoutX="58.0" layoutY="189.0" mnemonicParsing="false" onAction="#btn_addProduct" prefHeight="42.0" prefWidth="281.0" stylesheets="@../StyleSheets/Button.css" text="Add Products" textFill="WHITE">
       <cursor>
          <Cursor fx:constant="DEFAULT" />
       </cursor>
@@ -21,35 +16,35 @@
          <Font size="17.0" />
       </font>
    </Button>
-   <Button layoutX="64.0" layoutY="200.0" mnemonicParsing="false" onAction="#btn_sellProducts" prefHeight="35.0" prefWidth="281.0" style="-fx-background-color: rgba(0,0,0,0.1); -fx-border-color: white; -fx-border-radius: 10px;" text="Sell products" textFill="WHITE">
+   <Button layoutX="58.0" layoutY="249.0" mnemonicParsing="false" onAction="#btn_sellProducts" prefHeight="42.0" prefWidth="281.0" stylesheets="@../StyleSheets/Button.css" text="Sell products" textFill="WHITE">
       <font>
          <Font size="17.0" />
       </font></Button>
-   <Button layoutX="64.0" layoutY="257.0" mnemonicParsing="false" onAction="#btn_getDailyIncomes" prefHeight="35.0" prefWidth="281.0" style="-fx-background-color: rgba(0,0,0,0.1); -fx-border-radius: 10px; -fx-border-color: white;" text="Get Daily Incomes" textFill="WHITE">
+   <Button layoutX="58.0" layoutY="306.0" mnemonicParsing="false" onAction="#btn_getDailyIncomes" prefHeight="42.0" prefWidth="281.0" stylesheets="@../StyleSheets/Button.css" text="Get Daily Incomes" textFill="WHITE">
       <font>
          <Font size="16.0" />
       </font></Button>
-   <Button layoutX="64.0" layoutY="316.0" mnemonicParsing="false" onAction="#btn_getDailyIncomesByProduct" prefHeight="35.0" prefWidth="281.0" style="-fx-background-color: rgba(0,0,0,0.1); -fx-border-color: white; -fx-border-radius: 10px;" text="Get Daily Incomes By products" textFill="WHITE">
+   <Button layoutX="58.0" layoutY="365.0" mnemonicParsing="false" onAction="#btn_getDailyIncomesByProduct" prefHeight="42.0" prefWidth="281.0" stylesheets="@../StyleSheets/Button.css" text="Get Daily Incomes By products" textFill="WHITE">
       <font>
          <Font size="17.0" />
       </font></Button>
-   <Button layoutX="64.0" layoutY="432.0" mnemonicParsing="false" onAction="#btn_getMonthlyIncomesByProduct" prefHeight="35.0" prefWidth="281.0" style="-fx-background-color: rgba(0,0,0,0.1); -fx-border-color: white; -fx-border-radius: 10px;" text="Get Monthly Income By Product" textFill="WHITE">
+   <Button layoutX="58.0" layoutY="481.0" mnemonicParsing="false" onAction="#btn_getMonthlyIncomesByProduct" prefHeight="42.0" prefWidth="281.0" stylesheets="@../StyleSheets/Button.css" text="Get Monthly Income By Product" textFill="WHITE">
       <font>
          <Font size="17.0" />
       </font></Button>
-   <Button layoutX="64.0" layoutY="374.0" mnemonicParsing="false" onAction="#btn_getMonthlyIncomes" prefHeight="35.0" prefWidth="281.0" style="-fx-background-color: rgba(0,0,0,0.1); -fx-border-color: white; -fx-border-radius: 10px;" text="Get Monthly Incomes" textFill="WHITE">
+   <Button layoutX="58.0" layoutY="423.0" mnemonicParsing="false" onAction="#btn_getMonthlyIncomes" prefHeight="42.0" prefWidth="281.0" stylesheets="@../StyleSheets/Button.css" text="Get Monthly Incomes" textFill="WHITE">
       <font>
          <Font size="17.0" />
       </font></Button>
-   <Button layoutX="64.0" layoutY="552.0" mnemonicParsing="false" onAction="#btn_getYearlyIncomesByProduct" prefHeight="35.0" prefWidth="281.0" style="-fx-background-color: rgba(0,0,0,0.1); -fx-border-color: white; -fx-border-radius: 10px;" text="Get Yearly Income By Product" textFill="WHITE">
+   <Button layoutX="58.0" layoutY="601.0" mnemonicParsing="false" onAction="#btn_getYearlyIncomesByProduct" prefHeight="42.0" prefWidth="281.0" stylesheets="@../StyleSheets/Button.css" text="Get Yearly Income By Product" textFill="WHITE">
       <font>
          <Font size="17.0" />
       </font></Button>
-   <Button layoutX="64.0" layoutY="492.0" mnemonicParsing="false" onAction="#btn_getYearlyIncomes" prefHeight="35.0" prefWidth="281.0" style="-fx-background-color: rgba(0,0,0,0.1); -fx-border-color: white; -fx-border-radius: 10px;" text="Get Yearly Incomes" textFill="WHITE">
+   <Button layoutX="58.0" layoutY="541.0" mnemonicParsing="false" onAction="#btn_getYearlyIncomes" prefHeight="42.0" prefWidth="281.0" stylesheets="@../StyleSheets/Button.css" text="Get Yearly Incomes" textFill="WHITE">
       <font>
          <Font size="17.0" />
       </font></Button>
-   <Button layoutX="64.0" layoutY="611.0" mnemonicParsing="false" onAction="#btn_productDetails" prefHeight="35.0" prefWidth="281.0" style="-fx-background-color: rgba(0,0,0,0.1); -fx-border-color: white; -fx-border-radius: 10px;" text="Products Details" textFill="WHITE">
+   <Button layoutX="58.0" layoutY="660.0" mnemonicParsing="false" onAction="#btn_productDetails" prefHeight="42.0" prefWidth="281.0" stylesheets="@../StyleSheets/Button.css" text="Products Details" textFill="WHITE">
       <cursor>
          <Cursor fx:constant="DEFAULT" />
       </cursor>
@@ -57,5 +52,25 @@
          <Font size="17.0" />
       </font>
    </Button>
-   <AnchorPane fx:id="mainPanel" layoutX="411.0" layoutY="-7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="1115.0" style="-fx-background-color: rgba(0,0,0,0.1);" styleClass="mainPanel" />
+   <AnchorPane fx:id="mainPanel" layoutX="407.0" layoutY="33.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="1115.0" styleClass="anchor-pane" stylesheets="@../StyleSheets/MainPanel.css">
+      <children>
+         <Label fx:id="lbl" layoutX="272.0" layoutY="274.0" prefHeight="178.0" prefWidth="571.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20px;" text=" GROOVEE">
+            <font>
+               <Font name="Forte" size="120.0" />
+            </font>
+         </Label>
+      </children></AnchorPane>
+   <Label fx:id="lbl1" layoutX="6.0" layoutY="6.0" prefHeight="27.0" prefWidth="83.0" style="-fx-background-color: #ffffff; -fx-background-radius: 5px;" text="  GROOVEE">
+      <font>
+         <Font name="Forte" size="16.0" />
+      </font>
+   </Label>
+   <Button layoutX="58.0" layoutY="125.0" mnemonicParsing="false" onAction="#btn_Home" prefHeight="42.0" prefWidth="281.0" stylesheets="@../StyleSheets/Button.css" text="Home" textFill="WHITE">
+      <cursor>
+         <Cursor fx:constant="DEFAULT" />
+      </cursor>
+      <font>
+         <Font size="17.0" />
+      </font>
+   </Button>
 </AnchorPane>

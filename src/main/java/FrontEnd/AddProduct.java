@@ -154,7 +154,11 @@ public class AddProduct {
 
     }
 
-    public void loadTableData(ActionEvent actionEvent) {
-        refreshTableData();
+    public void btn_clearProduct(ActionEvent actionEvent) {
+        txt_productId.clear();
+        txt_productName.clear();
+        txt_purchasePrice.clear();
+        txt_sellingPrice.clear();
+        txt_quantity.clear();
     }
 }

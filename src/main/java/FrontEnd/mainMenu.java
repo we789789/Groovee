@@ -1,6 +1,7 @@
 package FrontEnd;
 
 import java.net.URL;
+import java.security.cert.PolicyNode;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -16,7 +17,6 @@ import javafx.util.Duration;
 
 public class mainMenu {
 
-    public AnchorPane mainFrame;
     public Button btn1;
     public Button btn2;
     public Button btn3;
@@ -35,6 +35,8 @@ public class mainMenu {
 
     @FXML
     private AnchorPane mainPanel;
+    @FXML
+    private AnchorPane mainFrame;
 
     @FXML
     void btn_addProduct(ActionEvent event) {
@@ -61,6 +63,24 @@ public class mainMenu {
 
     @FXML
     void btn_getDailyIncomes(ActionEvent event) {
+        try {
+            Parent addProductView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/dailyIncome.fxml")));
+            mainPanel.getChildren().setAll(addProductView);
+
+            AnchorPane.setTopAnchor(addProductView, 0.0);
+            AnchorPane.setBottomAnchor(addProductView, 0.0);
+            AnchorPane.setLeftAnchor(addProductView, 0.0);
+            AnchorPane.setRightAnchor(addProductView, 0.0);
+
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(500), addProductView);
+            fadeIn.setFromValue(0.0);
+            fadeIn.setToValue(1.0);
+            fadeIn.play();
+
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @FXML
@@ -146,25 +166,26 @@ public class mainMenu {
 
     @FXML
     void initialize() {
+        FadeTransition fade = new FadeTransition(Duration.millis(800), mainPanel);
+        fade.setFromValue(0.0);
+        fade.setToValue(1.0);
+        fade.play();
 
     }
 
     public void btn_productDetails(ActionEvent actionEvent) {
 
+    }
+
+    public void btn_Home(ActionEvent actionEvent) {
         try {
-            Parent addProductView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/ProductDetails.fxml")));
-            mainPanel.getChildren().setAll(addProductView);
+            Parent homeView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/MainForm.fxml")));
+            mainFrame.getChildren().setAll(homeView);
 
-            AnchorPane.setTopAnchor(addProductView, 0.0);
-            AnchorPane.setBottomAnchor(addProductView, 0.0);
-            AnchorPane.setLeftAnchor(addProductView, 0.0);
-            AnchorPane.setRightAnchor(addProductView, 0.0);
-
-            FadeTransition fadeIn = new FadeTransition(Duration.millis(500), addProductView);
-            fadeIn.setFromValue(0.0);
-            fadeIn.setToValue(1.0);
-            fadeIn.play();
-
+            AnchorPane.setTopAnchor(homeView, 0.0);
+            AnchorPane.setBottomAnchor(homeView, 0.0);
+            AnchorPane.setLeftAnchor(homeView, 0.0);
+            AnchorPane.setRightAnchor(homeView, 0.0);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
