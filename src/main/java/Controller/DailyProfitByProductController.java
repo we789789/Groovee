@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class DailyProfitByProductController {
 
     static ArrayList<DailyProfitByProduct> dailyIncomeByProduct = new ArrayList<>();
-    static float totalIncome = 0;
+    static float totalIncome;
 
     public static void setDailyIncomeByProduct() {
         dailyIncomeByProduct.clear();
@@ -153,6 +153,7 @@ public class DailyProfitByProductController {
     }
 
     public static float getTotalDailyIncome() {
+
         return totalIncome;
     }
 }

@@ -154,7 +154,11 @@ public class YearlyProfitByProductController {
     }
 
     public static ArrayList<YearlyProfitByProduct> getYearlyIncomeByProductList() {
+
         return yearlyIncomeByProduct;
+    }
+    public static float getTotalIncome() {
+        return totalIncome;
     }
 
 }

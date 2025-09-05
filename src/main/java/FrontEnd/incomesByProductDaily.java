@@ -21,8 +21,9 @@ import java.util.Objects;
 
 import static Controller.DailyProfitByProductController.getDailyIncomeByProduct;
 import static Controller.DailyProfitByProductController.setDailyIncomeByProduct;
-import static javafx.collections.FXCollections.observableArrayList;
 import static Controller.DailyProfitByProductController.getTotalDailyIncome;
+import static javafx.collections.FXCollections.observableArrayList;
+
 
 public class incomesByProductDaily {
 

@@ -25,6 +25,7 @@ import javafx.util.Duration;
 
 import static Controller.YearlyProfitByProductController.getYearlyIncomeByProductList;
 import static Controller.YearlyProfitByProductController.setYearlyIncomeByProductList;
+import static Controller.YearlyProfitByProductController.getTotalIncome;
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class IncomesByProductYearly {
@@ -51,7 +52,7 @@ public class IncomesByProductYearly {
 
 
     @FXML
-    private Label lbl_monthlyProfit;
+    private Label lbl_yearlyProfit;
 
     @FXML
     private AnchorPane mainPanel;
@@ -145,6 +146,8 @@ public class IncomesByProductYearly {
         col_yearlyProfitPurchasingPrice.setCellValueFactory(new PropertyValueFactory<>("purchasePrice"));
         col_yearlyProfitSellingPrice.setCellValueFactory(new PropertyValueFactory<>("sellingPrice"));
         col_yearlyProfit.setCellValueFactory(new PropertyValueFactory<>("yearlyProfit"));
+
+        lbl_yearlyProfit.setText(String.valueOf(getTotalIncome()));
     }
     private void refreshYearlyProfitTable(){
 
@@ -171,7 +174,7 @@ public class IncomesByProductYearly {
         assert col_yearlyProfitPurchasingPrice != null : "fx:id=\"col_yearlyProfitPurchasingPrice\" was not injected: check your FXML file 'YearlyProfitByProduct.fxml'.";
         assert col_yearlyProfitSellingPrice != null : "fx:id=\"col_yearlyProfitSellingPrice\" was not injected: check your FXML file 'YearlyProfitByProduct.fxml'.";
         assert col_yearlyProfitYear != null : "fx:id=\"col_yearlyProfitYear\" was not injected: check your FXML file 'YearlyProfitByProduct.fxml'.";
-        assert lbl_monthlyProfit != null : "fx:id=\"lbl_monthlyProfit\" was not injected: check your FXML file 'YearlyProfitByProduct.fxml'.";
+        assert lbl_yearlyProfit != null : "fx:id=\"lbl_monthlyProfit\" was not injected: check your FXML file 'YearlyProfitByProduct.fxml'.";
         assert mainPanel != null : "fx:id=\"mainPanel\" was not injected: check your FXML file 'YearlyProfitByProduct.fxml'.";
         assert tbl_yearlyProfit != null : "fx:id=\"tbl_yearlyProfit\" was not injected: check your FXML file 'YearlyProfitByProduct.fxml'.";
         assert txt_searchField != null : "fx:id=\"txt_searchField\" was not injected: check your FXML file 'YearlyProfitByProduct.fxml'.";

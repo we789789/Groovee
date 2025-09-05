@@ -154,10 +154,11 @@ public class SetIncome {
 
                 }else{
 
-                    Statement = connection.prepareStatement("INSERT INTO MONTHLY_INCOMES VALUES (?,?,?)");
+                    Statement = connection.prepareStatement("INSERT INTO MONTHLY_INCOMES VALUES (?,?,?,?)");
                     Statement.setInt(1, year);
                     Statement.setInt(2, month);
                     Statement.setFloat(3, monthlyIncome);
+                    Statement.setInt(4, year*100+month);
                     Statement.executeUpdate();
                 }
 

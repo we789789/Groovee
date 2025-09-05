@@ -1,0 +1,114 @@
+/* Customize the popup content */
+.datepicker {
+    -fx-background-color: #1c1c3c;
+    -fx-text-fill: white;
+}
+.date-picker-popup {
+    -fx-background-color: #1c1c3c;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-border-color: rgba(255,255,255,0.08);
+    -fx-padding: 5px;
+}
+.today {
+    -fx-background-color: rgba(255,255,255,0.08);
+    -fx-text-fill: white;
+}
+
+/* Style the calendar */
+.calendar-grid {
+    -fx-background-color: rgba(0,0,0,0.1);
+    -fx-text-fill: white;
+}
+
+/* Month-Year panel */
+.date-picker-popup > .month-year-pane {
+    -fx-background-color: #1c1c3c;
+    -fx-text-fill: white;
+}
+
+.date-picker .cell{
+    -fx-background-color: #1c1c3c;
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+}
+.date-picker .cell:hover{
+    -fx-background-color: rgba(0,0,0,0.1);
+    -fx-text-fill: white;
+}
+.date-picker .cell.previous-month,
+.date-picker .cell.next-month{
+    -fx-background-color: rgba(255,255,255,0.08);
+    -fx-text-fill: rgba(255,255,255,0.5);
+}
+
+/* Buttons in the DatePicker */
+.date-picker-popup > .button {
+    -fx-background-color: rgba(0,0,0,0.1);
+    -fx-text-fill: white;
+}
+
+.date-picker-popup > .button:hover {
+    -fx-background-color: rgba(0,0,0,0.1);
+    -fx-text-fill: white;
+}
+
+/* Spinner buttons */
+.spinner-button {
+    -fx-background-color: #1c1c3c;
+    -fx-text-fill: white;
+}
+
+.spinner-button:hover {
+    -fx-background-color: rgba(0,0,0,0.1);
+}
+
+/* Day names */
+.day-name-cell {
+    -fx-background-color: #1c1c3c;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/* Selected day */
+.date-picker .selected {
+    -fx-background-color: #1c1c3c;
+    -fx-text-fill: white;
+}
+
+/* Hover effect on days */
+.date-cell:hover {
+    -fx-background-color: rgba(0,0,0,0.1);
+}
+.date-picker-popup > .month-year-pane .label{
+    -fx-text-fill: white;
+}
+.date-picker-popup > .month-year-pane .arrow-button{
+    -fx-background-color: transparent;
+}
+.date-picker-popup > .month-year-pane .arrow-button:hover{
+    -fx-background-color: rgba(0,0,0,0.1);
+}
+.date-picker-popup > .month-year-pane .arrow-button .arrow{
+    -fx-text-fill: white;
+}
+.date-picker-popup > .month-year-pane .arrow-button .arrow:hover{
+    -fx-background-color: rgba(0,0,0,0.1);
+}
+.date-picker .text-field{
+    -fx-background-color: #1c1c3c;
+    -fx-text-fill: white;
+}
+.date-picker .arrow-button{
+    -fx-background-color: rgba(255,255,255,0.08);
+}
+.date-picker .arrow-button:hover{
+    -fx-background-color: rgba(0,0,0,0.1);
+}
+.date-picker .arrow-button .arrow{
+    -fx-text-fill: white;
+    background-color: #1c1c3c;
+}
+.date-picker .arrow-button .arrow:hover{
+    -fx-background-color: rgba(0,0,0,0.1);
+}

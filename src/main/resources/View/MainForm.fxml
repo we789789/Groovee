@@ -44,7 +44,7 @@
       <font>
          <Font size="17.0" />
       </font></Button>
-   <Button layoutX="58.0" layoutY="660.0" mnemonicParsing="false" onAction="#btn_productDetails" prefHeight="42.0" prefWidth="281.0" stylesheets="@../StyleSheets/Button.css" text="Products Details" textFill="WHITE">
+   <Button layoutX="58.0" layoutY="660.0" mnemonicParsing="false" onMouseReleased="#btn_productDetails" prefHeight="42.0" prefWidth="281.0" stylesheets="@../StyleSheets/Button.css" text="Products Details" textFill="WHITE">
       <cursor>
          <Cursor fx:constant="DEFAULT" />
       </cursor>

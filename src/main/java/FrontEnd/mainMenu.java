@@ -1,7 +1,6 @@
 package FrontEnd;
 
 import java.net.URL;
-import java.security.cert.PolicyNode;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -12,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
@@ -107,7 +107,24 @@ public class mainMenu {
 
     @FXML
     void btn_getMonthlyIncomes(ActionEvent event) {
+        try {
+            Parent addProductView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/MonthlyProfit.fxml")));
+            mainPanel.getChildren().setAll(addProductView);
 
+            AnchorPane.setTopAnchor(addProductView, 0.0);
+            AnchorPane.setBottomAnchor(addProductView, 0.0);
+            AnchorPane.setLeftAnchor(addProductView, 0.0);
+            AnchorPane.setRightAnchor(addProductView, 0.0);
+
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(500), addProductView);
+            fadeIn.setFromValue(0.0);
+            fadeIn.setToValue(1.0);
+            fadeIn.play();
+
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @FXML
@@ -134,7 +151,24 @@ public class mainMenu {
 
     @FXML
     void btn_getYearlyIncomes(ActionEvent event) {
+        try {
+            Parent addProductView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/YearlyProfit.fxml")));
+            mainPanel.getChildren().setAll(addProductView);
 
+            AnchorPane.setTopAnchor(addProductView, 0.0);
+            AnchorPane.setBottomAnchor(addProductView, 0.0);
+            AnchorPane.setLeftAnchor(addProductView, 0.0);
+            AnchorPane.setRightAnchor(addProductView, 0.0);
+
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(500), addProductView);
+            fadeIn.setFromValue(0.0);
+            fadeIn.setToValue(1.0);
+            fadeIn.play();
+
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
     @FXML
     void btn_getYearlyIncomesByProduct(ActionEvent event) {
@@ -173,8 +207,25 @@ public class mainMenu {
 
     }
 
-    public void btn_productDetails(ActionEvent actionEvent) {
+    public void btn_productDetails(MouseEvent actionEvent) {
+        try {
+            Parent addProductView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/ProductDetails.fxml")));
+            mainPanel.getChildren().setAll(addProductView);
 
+            AnchorPane.setTopAnchor(addProductView, 0.0);
+            AnchorPane.setBottomAnchor(addProductView, 0.0);
+            AnchorPane.setLeftAnchor(addProductView, 0.0);
+            AnchorPane.setRightAnchor(addProductView, 0.0);
+
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(500), addProductView);
+            fadeIn.setFromValue(0.0);
+            fadeIn.setToValue(1.0);
+            fadeIn.play();
+
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void btn_Home(ActionEvent actionEvent) {

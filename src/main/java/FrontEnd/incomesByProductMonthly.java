@@ -24,6 +24,7 @@ import javafx.util.Duration;
 
 import static Controller.MonthlyProfitByProductController.getMonthlyIncomeByProductList;
 import static Controller.MonthlyProfitByProductController.setMonthlyIncomeByProductList;
+import static Controller.MonthlyProfitByProductController.getTotalIncome;
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class incomesByProductMonthly{
@@ -148,6 +149,8 @@ public class incomesByProductMonthly{
         col_monthlyProfitPurchasingPrice.setCellValueFactory(new PropertyValueFactory<>("purchasePrice"));
         col_monthlyProfitSellingPrice.setCellValueFactory(new PropertyValueFactory<>("sellingPrice"));
         col_monthlyProfit.setCellValueFactory(new PropertyValueFactory<>("monthlyIncome"));
+
+        lbl_monthlyProfit.setText(String.valueOf(getTotalIncome()));
     }
 
     void refreshMonthlyIncomeByProduct() {

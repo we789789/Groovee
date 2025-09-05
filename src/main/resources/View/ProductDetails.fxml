@@ -17,7 +17,7 @@
             <TableColumn fx:id="col_quantity" prefWidth="152.0" resizable="false" text="Quantity" />
         </columns>
       </TableView>
-      <TextField fx:id="txt_searchField" layoutX="477.0" layoutY="23.0" onKeyPressed="#search" prefHeight="41.0" prefWidth="384.0" promptText="       Search Products  🔍 " style="-fx-background-color: transperent; -fx-text-fill: white; -fx-border-color: white; -fx-background-radius: 30px; -fx-border-radius: 30px;">
+      <TextField fx:id="txt_searchField" layoutX="477.0" layoutY="23.0" onKeyReleased="#search" prefHeight="41.0" prefWidth="384.0" promptText="       Search Products  🔍 " style="-fx-background-color: transperent; -fx-text-fill: white; -fx-border-color: white; -fx-background-radius: 30px; -fx-border-radius: 30px;">
          <font>
             <Font name="Segoe UI" size="17.0" />
          </font></TextField>

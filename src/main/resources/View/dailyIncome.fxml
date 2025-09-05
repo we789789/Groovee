@@ -30,8 +30,8 @@
                   <Font name="Segoe UI" size="25.0" />
                </font>
             </Label>
-            <DatePicker fx:id="date1" editable="true" layoutX="40.0" layoutY="175.0" prefHeight="40.0" prefWidth="293.0" />
-            <DatePicker fx:id="date2" editable="true" layoutX="39.0" layoutY="302.0" prefHeight="40.0" prefWidth="293.0" />
+            <DatePicker fx:id="date1" editable="true" layoutX="40.0" layoutY="175.0" prefHeight="40.0" prefWidth="293.0" promptText="From" stylesheets="@../StyleSheets/DatePicker.css" />
+            <DatePicker fx:id="date2" editable="true" layoutX="39.0" layoutY="302.0" prefHeight="40.0" prefWidth="293.0" promptText="To" stylesheets="@../StyleSheets/DatePicker.css" />
               <ButtonBar layoutX="9.0" layoutY="615.0" prefHeight="40.0" prefWidth="359.0" style="align-items: center;">
                   <buttons>
                       <Button mnemonicParsing="false" onMouseReleased="#btnYearly" prefHeight="30.0" prefWidth="145.0" stylesheets="@../StyleSheets/Profits.css" text="Yearly" textFill="WHITE" />
@@ -61,9 +61,14 @@
             </Label>
             <Button layoutX="72.0" layoutY="442.0" mnemonicParsing="false" onMouseReleased="#btn_filter" prefHeight="40.0" prefWidth="251.0" stylesheets="@../StyleSheets/Button.css" text="Filter" textFill="WHITE" />
             <Button layoutX="73.0" layoutY="509.0" mnemonicParsing="false" onMouseReleased="#btn_clear" prefHeight="40.0" prefWidth="251.0" stylesheets="@../StyleSheets/Button.css" text="Clear" textFill="WHITE" />
+            <Label fx:id="lbl_message" layoutX="40.0" layoutY="387.0" prefHeight="32.0" prefWidth="333.0" style="-fx-text-alignment: center;" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI" size="17.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="419.0" layoutY="19.0" prefHeight="683.0" prefWidth="682.0">
+      <AnchorPane fx:id="tablePanel" layoutX="419.0" layoutY="19.0" prefHeight="700.0" prefWidth="682.0">
          <children>
               <TableView fx:id="tbl_dailyProfit" layoutX="20.0" layoutY="17.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="643.0" stylesheets="@../StyleSheets/Profits.css">
                   <columns>

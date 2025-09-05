@@ -29,7 +29,7 @@
                 <Font name="Segoe UI" size="17.0" />
             </font>
         </Label>
-        <Label fx:id="lbl_monthlyProfit" layoutX="731.0" layoutY="677.0" prefHeight="25.0" prefWidth="237.0" textFill="#04ff00">
+        <Label fx:id="lbl_yearlyProfit" layoutX="731.0" layoutY="677.0" prefHeight="25.0" prefWidth="237.0" textFill="#04ff00">
             <font>
                 <Font size="17.0" />
             </font>

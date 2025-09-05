@@ -14,10 +14,12 @@ import java.util.ArrayList;
 public class dailyProfitController {
 
     static ArrayList<dailyProfit> dailyProfits = new ArrayList<>();
+    static float totalProfit;
 
     public static void setDailyProfitsList(){
 
         dailyProfits.clear();
+        totalProfit = 0;
 
         String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
         String user = "root";
@@ -38,6 +40,7 @@ public class dailyProfitController {
             while (dailyProfit.next()) {
                 date = dailyProfit.getDate("DATE").toLocalDate();
                 profit = dailyProfit.getFloat("INCOME");
+                totalProfit += profit;
 
                 dailyProfits.add(new dailyProfit(date,profit));
             }
@@ -50,6 +53,7 @@ public class dailyProfitController {
     public static void setDailyProfitsList(LocalDate date1, LocalDate date2){
 
         dailyProfits.clear();
+        totalProfit = 0;
 
         String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
         String user = "root";
@@ -65,13 +69,14 @@ public class dailyProfitController {
             PreparedStatement Statement;
 
             Statement = connection.prepareStatement("SELECT * FROM DAILY_INCOMES WHERE DATE BETWEEN ? AND ?");
-            Statement.setDate(1, Date.valueOf(date1));
-            Statement.setDate(2, Date.valueOf(date2));
+            Statement.setDate(1, java.sql.Date.valueOf(date1));
+            Statement.setDate(2, java.sql.Date.valueOf(date2));
             ResultSet dailyProfit = Statement.executeQuery();
 
             while (dailyProfit.next()) {
                 date = dailyProfit.getDate("DATE").toLocalDate();
                 profit = dailyProfit.getFloat("INCOME");
+                totalProfit += profit;
 
                 dailyProfits.add(new dailyProfit(date,profit));
             }
@@ -83,6 +88,9 @@ public class dailyProfitController {
 
     public static ArrayList<dailyProfit> getDailyProfitsList(){
         return dailyProfits;
+    }
+    public static float getTotalProfit(){
+        return totalProfit;
     }
 
 }

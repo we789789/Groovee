@@ -90,18 +90,16 @@ public class ProductDetails {
         }
     }
     public void search(KeyEvent keyEvent) {
-        if (keyEvent.getCode() == KeyCode.ENTER) {
             String searchTerm = txt_searchField.getText();
 
             if (searchTerm == null || searchTerm.isEmpty()) {
                 setProductList();
                 refreshTableData();
 
-            }else{
+            }else {
                 setProductList(searchTerm);
                 refreshTableData(searchTerm);
             }
-        }
     }
 
     private void refreshTableData() {
