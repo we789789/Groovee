@@ -143,11 +143,11 @@ public class incomesByProductMonthly{
     void visualizeMonthlyIncomeByProduct(){
         col_monthlyProfitYear.setCellValueFactory(new PropertyValueFactory<>("year"));
         col_monthlyProfitMonth.setCellValueFactory(new PropertyValueFactory<>("month"));
-        col_monthlyProfitProductID.setCellValueFactory(new PropertyValueFactory<>("productID"));
+        col_monthlyProfitProductID.setCellValueFactory(new PropertyValueFactory<>("productId"));
         col_monthlyProfitProductName.setCellValueFactory(new PropertyValueFactory<>("productName"));
-        col_monthlyProfitPurchasingPrice.setCellValueFactory(new PropertyValueFactory<>("purchasingPrice"));
+        col_monthlyProfitPurchasingPrice.setCellValueFactory(new PropertyValueFactory<>("purchasePrice"));
         col_monthlyProfitSellingPrice.setCellValueFactory(new PropertyValueFactory<>("sellingPrice"));
-        col_monthlyProfit.setCellValueFactory(new PropertyValueFactory<>("monthlyProfit"));
+        col_monthlyProfit.setCellValueFactory(new PropertyValueFactory<>("monthlyIncome"));
     }
 
     void refreshMonthlyIncomeByProduct() {

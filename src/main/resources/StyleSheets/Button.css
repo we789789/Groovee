@@ -1,0 +1,14 @@
+.button{
+    -fx-cursor: hand;
+    -fx-background-radius: 10px;
+    -fx-background-color: #1c1c3c;
+    -fx-border-radius: 10px;
+    -fx-border-color: #ffffff;
+    -fx-text-fill: #ffffff;
+    -fx-font-family: Segoe UI;
+    -fx-font-size: 17px;
+    -fx-text-alignment: center;
+}
+.button:hover{
+    -fx-background-color: rgba(0, 0, 0, 0.1);
+}

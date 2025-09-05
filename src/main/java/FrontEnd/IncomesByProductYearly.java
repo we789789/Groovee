@@ -140,9 +140,9 @@ public class IncomesByProductYearly {
 
     private void visualizerYearlyProfitTable(){
         col_yearlyProfitYear.setCellValueFactory(new PropertyValueFactory<>("year"));
-        col_yearlyProfitProductID.setCellValueFactory(new PropertyValueFactory<>("productID"));
+        col_yearlyProfitProductID.setCellValueFactory(new PropertyValueFactory<>("productId"));
         col_yearlyProfitProductName.setCellValueFactory(new PropertyValueFactory<>("productName"));
-        col_yearlyProfitPurchasingPrice.setCellValueFactory(new PropertyValueFactory<>("purchasingPrice"));
+        col_yearlyProfitPurchasingPrice.setCellValueFactory(new PropertyValueFactory<>("purchasePrice"));
         col_yearlyProfitSellingPrice.setCellValueFactory(new PropertyValueFactory<>("sellingPrice"));
         col_yearlyProfit.setCellValueFactory(new PropertyValueFactory<>("yearlyProfit"));
     }

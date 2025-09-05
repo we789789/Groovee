@@ -1,5 +1,5 @@
 .table-row-cell {
-    -fx-padding: 3x 0;
+    -fx-padding: 3px 0;
     -fx-background-insets: 0, 3;
     -fx-border-color: transparent;
 }
@@ -14,6 +14,9 @@
     -fx-border-color: white;
     -fx-border-radius: 5px;
 }
+.button:hover{
+    -fx-background-color: rgba(0,0,0,0.2);
+}
 
 .table-view .column-header{
     -fx-background-color: #1c1c3c;
@@ -23,7 +26,7 @@
     -fx-text-fill: white;
     -fx-text-size: 17px;
     -fx-font-family: Segoe UI;
-    -fx-alignment: left;
+    -fx-alignment: center_left;
     -fx-padding:  10 0 10 0;
     -fx-border-color: rgba(0,0,0,0.2);
 }
