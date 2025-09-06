@@ -15,14 +15,22 @@
     </properties>
 
 
+    <repositories>
+        <repository>
+            <id>gluon-releases</id>
+            <url>https://nexus.gluonhq.com/nexus/content/repositories/releases/</url>
+        </repository>
+    </repositories>
+
 
     <dependencies>
-
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>26-ea+3</version>
+            <version>24.0.1</version>
         </dependency>
+
+
 
 
         <dependency>
@@ -31,11 +39,25 @@
             <version>8.0.33</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>24.0.1</version>
+        </dependency>
+
+
 
         <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>charm</artifactId>
-            <version>6.0.2</version>
+            <version>6.1.1</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.controlsfx</groupId>
+            <artifactId>controlsfx</artifactId>
+            <version>11.1.2</version>
         </dependency>
 
 

@@ -1,0 +1,33 @@
+.text-field {
+    -fx-background-color: #1c1c3c;
+    -fx-border-color: rgba(255,255,255,0.08);
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-font-size: 17px;
+    -fx-text-fill: white;
+    -fx-padding: 8px;
+}
+
+
+.auto-complete-popup > .list-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #1e90ff;
+    -fx-border-radius: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0.0, 0, 2);
+}
+
+.auto-complete-popup > .list-view > .list-cell {
+    -fx-padding: 6 10;
+    -fx-font-size: 13px;
+    -fx-text-fill: #333333;
+    -fx-background-color: transparent;
+}
+
+.auto-complete-popup > .list-view > .list-cell:filled:hover {
+    -fx-background-color: #e0f0ff;
+}
+
+.auto-complete-popup > .list-view > .list-cell:filled:selected {
+    -fx-background-color: #cce5ff;
+    -fx-text-fill: #000000;
+}

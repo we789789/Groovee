@@ -15,7 +15,7 @@
     -fx-border-radius: 5px;
 }
 .button:hover{
-    -fx-background-color: rgba(0,0,0,0.2);
+    -fx-background-color: rgba(255, 255, 255, 0.05);
 }
 
 .table-view .column-header{

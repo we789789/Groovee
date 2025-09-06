@@ -109,6 +109,15 @@ public class AddProduct {
         txt_quantity.clear();
 
     }
+    public void btn_clearProduct(ActionEvent actionEvent) {
+        txt_productId.clear();
+        txt_productName.clear();
+        txt_purchasePrice.clear();
+        txt_sellingPrice.clear();
+        txt_quantity.clear();
+        lbl_fail.setText("");
+        lbl_Success.setText("");
+    }
 
     public void visualizeTableData() {
         col_productID.setCellValueFactory(new PropertyValueFactory<>("productId"));
@@ -154,11 +163,5 @@ public class AddProduct {
 
     }
 
-    public void btn_clearProduct(ActionEvent actionEvent) {
-        txt_productId.clear();
-        txt_productName.clear();
-        txt_purchasePrice.clear();
-        txt_sellingPrice.clear();
-        txt_quantity.clear();
-    }
+
 }
