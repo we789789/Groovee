@@ -2,26 +2,22 @@ package BackEnd;
 
 import java.sql.*;
 import java.util.Date;
-import java.util.Scanner;
 import java.time.LocalDate;
 
 public class SetIncome {
 
-    Scanner scanner = new Scanner(System.in);
-    Date date = new Date();
-    java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-    LocalDate currentDate = LocalDate.now();
-    PreparedStatement Statement;
+    static String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
+    static String user = "root";
+    static String password = "HBdeLA@2004";
 
-    String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
-    String user = "root";
-    String password = "HBdeLA@2004";
 
-    int month = currentDate.getMonthValue();
-    int year = currentDate.getYear();
-    int day = currentDate.getDayOfMonth();
+    public static void setIncome(int productId, int quantity) {
+        LocalDate currentDate = LocalDate.now();
+        Date date = new Date();
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
-    public void setIncome(int productId, int quantity) {
+        int month = currentDate.getMonthValue();
+        int year = currentDate.getYear();
 
         float income;
         float monthlyIncome;
@@ -31,11 +27,12 @@ public class SetIncome {
         float yearlyIncome;
         float profit;
 
+
         try {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection(url, user, password);
-            Statement statement = connection.createStatement();
+            PreparedStatement Statement;
 
             Statement = connection.prepareStatement("SELECT PURCHASE_PRICE, SELLING_PRICE FROM products WHERE PRODUCT_ID = ?");
             Statement.setInt(1, productId);
@@ -52,7 +49,7 @@ public class SetIncome {
                 yearlyIncome = income;
 
 
-                    // ----------SET DAILY INCOME BY PRODUCT------------- //
+                // ----------SET DAILY INCOME BY PRODUCT------------- //
 
 
                 Statement = connection.prepareStatement("SELECT INCOME FROM INCOME WHERE DATE =? AND PRODUCT_ID =?");
@@ -69,8 +66,7 @@ public class SetIncome {
                     Statement.setInt(2, productId);
                     Statement.setDate(3, sqlDate);
                     Statement.executeUpdate();
-                }
-                else{
+                } else {
                     Statement = connection.prepareStatement("INSERT INTO INCOME VALUES (?,?,?)");
 
                     Statement.setDate(1, sqlDate);
@@ -79,7 +75,7 @@ public class SetIncome {
                     Statement.executeUpdate();
                 }
 
-                        // --------- SET DAILY INCOME ----------- //
+                // --------- SET DAILY INCOME ----------- //
 
 
                 Statement = connection.prepareStatement("SELECT INCOME FROM DAILY_INCOMES WHERE DATE =?");
@@ -95,7 +91,7 @@ public class SetIncome {
                     Statement.setDate(2, sqlDate);
                     Statement.executeUpdate();
 
-                } else{
+                } else {
 
                     Statement = connection.prepareStatement("INSERT INTO DAILY_INCOMES VALUES (?,?)");
                     Statement.setDate(1, sqlDate);
@@ -104,7 +100,7 @@ public class SetIncome {
                 }
 
 
-                        // --------- STE MONTHLY INCOME BY PRODUCT -----------//
+                // --------- STE MONTHLY INCOME BY PRODUCT -----------//
 
 
                 Statement = connection.prepareStatement("SELECT INCOME FROM MONTHLY_INCOME_BY_PRODUCT WHERE YEAR =? AND MONTH =? AND PRODUCT_ID =?");
@@ -124,7 +120,7 @@ public class SetIncome {
                     Statement.setInt(4, productId);
                     Statement.executeUpdate();
 
-                }else{
+                } else {
 
                     Statement = connection.prepareStatement("INSERT INTO MONTHLY_INCOME_BY_PRODUCT VALUES (?,?,?,?)");
                     Statement.setInt(1, year);
@@ -134,7 +130,7 @@ public class SetIncome {
                     Statement.executeUpdate();
                 }
 
-                        // --------- SET MONTHLY INCOME --------- //
+                // --------- SET MONTHLY INCOME --------- //
 
 
                 Statement = connection.prepareStatement("SELECT INCOME FROM MONTHLY_INCOMES WHERE YEAR = ? AND MONTH = ?");
@@ -152,18 +148,18 @@ public class SetIncome {
                     Statement.setInt(3, month);
                     Statement.executeUpdate();
 
-                }else{
+                } else {
 
                     Statement = connection.prepareStatement("INSERT INTO MONTHLY_INCOMES VALUES (?,?,?,?)");
                     Statement.setInt(1, year);
                     Statement.setInt(2, month);
                     Statement.setFloat(3, monthlyIncome);
-                    Statement.setInt(4, year*100+month);
+                    Statement.setInt(4, year * 100 + month);
                     Statement.executeUpdate();
                 }
 
 
-                        // ------------ SET YEARLY INCOME BY PRODUCT --------------- //
+                // ------------ SET YEARLY INCOME BY PRODUCT --------------- //
 
 
                 Statement = connection.prepareStatement("SELECT INCOME FROM YEARLY_INCOME_BY_PRODUCT WHERE YEAR =? AND PRODUCT_ID =? ");
@@ -171,17 +167,17 @@ public class SetIncome {
                 Statement.setInt(2, productId);
                 ResultSet YearlyIncomeByProduct = Statement.executeQuery();
 
-                if(YearlyIncomeByProduct.next()){
+                if (YearlyIncomeByProduct.next()) {
 
                     yearlyIncomeByProduct += YearlyIncomeByProduct.getFloat("INCOME");
 
                     Statement = connection.prepareStatement("UPDATE YEARLY_INCOME_BY_PRODUCT SET INCOME=? WHERE YEAR =? AND PRODUCT_ID =?");
-                    Statement.setFloat(1,yearlyIncomeByProduct);
+                    Statement.setFloat(1, yearlyIncomeByProduct);
                     Statement.setInt(2, year);
                     Statement.setInt(3, productId);
                     Statement.executeUpdate();
 
-                }else{
+                } else {
 
                     Statement = connection.prepareStatement("INSERT INTO YEARLY_INCOME_BY_PRODUCT VALUES (?,?,?)");
                     Statement.setInt(1, year);
@@ -192,14 +188,14 @@ public class SetIncome {
                 }
 
 
-                        //  ------------- SET YEARLY INCOME ------------- //
+                //  ------------- SET YEARLY INCOME ------------- //
 
 
                 Statement = connection.prepareStatement("SELECT INCOME FROM YEARLY_INCOMES WHERE YEAR =? ");
                 Statement.setInt(1, year);
                 ResultSet YearlyIncomes = Statement.executeQuery();
 
-                if(YearlyIncomes.next()){
+                if (YearlyIncomes.next()) {
 
                     yearlyIncome += YearlyIncomes.getFloat("INCOME");
 
@@ -208,7 +204,7 @@ public class SetIncome {
                     Statement.setInt(2, year);
                     Statement.executeUpdate();
 
-                }else{
+                } else {
 
                     Statement = connection.prepareStatement("INSERT INTO YEARLY_INCOMES VALUES (?,?)");
                     Statement.setInt(1, year);
@@ -217,20 +213,12 @@ public class SetIncome {
                 }
 
 
-            }
-            else{
-                System.out.println("broowsky.Product details not found. INCOME table update fail.");
+            } else {
+                System.out.println("Product details not found. INCOME table update fail.");
             }
 
         } catch (Exception e) {
             System.out.println(e);
         }
     }
-
-    public void getIncomes(
-
-    ){
-        
-    }
-
 }

@@ -1,15 +1,20 @@
 package Controller;
 
+import BackEnd.Quantity;
 import BackEnd.Sale;
+import javafx.scene.control.TextField;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+import static BackEnd.SetIncome.setIncome;
+
 public class SellProductController {
-    static ArrayList<Sale> saleList;
-    static ArrayList<String> suggestedNameList;
+    static ArrayList<Sale> saleList = new ArrayList<>();
+    static ArrayList<String> suggestedNameList = new ArrayList<>();
+    static ArrayList<Quantity>  quantity= new ArrayList<>();
 
     static int productID = 0;
     static float rate = 0;
@@ -17,46 +22,9 @@ public class SellProductController {
     static int currentQuantity = 0;
     static int newSaleID;
 
-    public SellProductController() {
-        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
-        String user = "root";
-        String password = "HBdeLA@2004";
+    public SellProductController() {}
 
-        int LastSaleID = 0;
-        String productName = "";
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
-            PreparedStatement Statement;
-
-            Statement = connection.prepareStatement("SELECT SALE_ID FROM SALES");
-            ResultSet existsSales = Statement.executeQuery();
-            while (existsSales.next()) {
-                LastSaleID = existsSales.getInt("SALE_ID");
-            }
-            newSaleID = LastSaleID + 1;
-
-            Statement = connection.prepareStatement("SELECT NAME FROM PRODUCTS");
-            ResultSet suggestingNames = Statement.executeQuery();
-            while (suggestingNames.next()) {
-                productName = suggestingNames.getString("NAME");
-                suggestedNameList.add(productName);
-            }
-
-            Statement = connection.prepareStatement("SELECT QUANTITY FROM STOCK WHERE PRODUCT_ID=?");
-            Statement.setInt(1, productID);
-            ResultSet stock = Statement.executeQuery();
-            if (stock.next()) {
-                currentQuantity = stock.getInt("QUANTITY");
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void addSale(int saleID, int productID, int quantity) {
+    public static void addSale(int saleID, int productID, int quantity) {
 
         String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
         String user = "root";
@@ -74,12 +42,13 @@ public class SellProductController {
             ResultSet amount = Statement.executeQuery();
 
             if (amount.next()) {
-                price = amount.getFloat("SELLING_PRICE")*quantity;
+                rate = amount.getFloat("SELLING_PRICE");
+                price = rate*quantity;
             } else {
                 System.out.println("Product not found.");
             }
 
-            if(currentQuantity>=quantity) {
+
 
                 Statement = connection.prepareStatement("SELECT NAME FROM PRODUCTS  WHERE PRODUCT_ID=?");
                 Statement.setInt(1, productID);
@@ -89,18 +58,15 @@ public class SellProductController {
                 }else{
                     System.out.println("Product not found.");
                 }
-                if(currentQuantity>=quantity) {
                     saleList.add(new Sale(saleID, productID, quantity, rate, price, productName));
-                    currentQuantity -= quantity;
-                }
-            }
+
 
 
         }catch (Exception e){
             e.printStackTrace();
         }
     }
-    public String addSale(int saleID, String productName, int quantity) {
+    public static void addSale(int saleID, String productName, int quantity) {
 
         String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
         String user = "root";
@@ -136,28 +102,196 @@ public class SellProductController {
                 saleList.add(new Sale(saleID, productID, quantity, rate, price, productName));
                 currentQuantity -= quantity;
             } else {
-                return "Insufficient stock";
+                return;
             }
         } catch(Exception e) {
             e.printStackTrace();
         }
-        return "";
     }
 
     public static int getNewSaleID() {
-        return newSaleID;
-    }
-    public static ArrayList<String> getSuggestedNameList() {
-        return suggestedNameList;
-    }
-    public static ArrayList<Sale> getSaleList() {
-        return saleList;
-    }
-    public static void doneSale(){
 
         String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
         String user = "root";
         String password = "HBdeLA@2004";
+
+        int LastSaleID = 0;
+        String productName = "";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(url, user, password);
+            PreparedStatement Statement;
+
+            Statement = connection.prepareStatement("SELECT SALE_ID FROM SALES");
+            ResultSet existsSales = Statement.executeQuery();
+            while (existsSales.next()) {
+                LastSaleID = existsSales.getInt("SALE_ID");
+            }
+            newSaleID = LastSaleID + 1;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return newSaleID;
+    }
+
+    public static ArrayList<String> getSuggestedNameList() {
+
+        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
+        String user = "root";
+        String password = "HBdeLA@2004";
+
+        String productName = "";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(url, user, password);
+            PreparedStatement Statement;
+
+
+            Statement = connection.prepareStatement("SELECT NAME FROM PRODUCTS");
+            ResultSet suggestingNames = Statement.executeQuery();
+            while (suggestingNames.next()) {
+                productName = suggestingNames.getString("NAME");
+                suggestedNameList.add(productName);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return suggestedNameList;
+    }
+
+    public static ArrayList<Sale> getSaleList() {
+        return saleList;
+
+    }
+
+    public static String getProductName(int productID) {
+        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
+        String user = "root";
+        String password = "HBdeLA@2004";
+
+        String productName = "";
+        try{
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(url, user, password);
+            PreparedStatement Statement;
+
+            Statement = connection.prepareStatement("SELECT NAME FROM PRODUCTS WHERE PRODUCT_ID=?");
+            Statement.setInt(1, productID);
+            ResultSet name = Statement.executeQuery();
+            if (name.next()) {
+                productName = name.getString("NAME");
+            }else{
+                return "Product Not Found";
+            }
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return productName;
+    }
+
+    public static void setQuantity(int productID, int Quantity) {
+        quantity.add(new Quantity(productID,Quantity));
+    }
+
+
+    public static int getQuantity(int productID) {
+
+        int billQuantity =0;
+
+        for(int i = 0; i < quantity.size(); i++){
+            if(quantity.get(i).getProductID() == productID){
+                billQuantity += quantity.get(i).getQuantity();
+            }
+        }
+
+        return billQuantity;
+    }
+
+
+    public static int getStock(int productID) {
+        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
+        String user = "root";
+        String password = "HBdeLA@2004";
+        int stock = 0;
+        try {
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(url, user, password);
+            PreparedStatement Statement;
+
+            Statement = connection.prepareStatement("SELECT QUANTITY FROM STOCK WHERE PRODUCT_ID=?");
+            Statement.setInt(1, productID);
+            ResultSet stocks = Statement.executeQuery();
+            if (stocks.next()) {
+                stock = stocks.getInt("QUANTITY");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return stock;
+    }
+
+    public static float getPrice(int productID) {
+        float price = 0;
+        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
+        String user = "root";
+        String password = "HBdeLA@2004";
+
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(url, user, password);
+            PreparedStatement Statement;
+
+            Statement = connection.prepareStatement("SELECT SELLING_PRICE FROM PRODUCTS WHERE PRODUCT_ID=?");
+            Statement.setInt(1, productID);
+            ResultSet prices = Statement.executeQuery();
+            if (prices.next()) {
+                price = prices.getFloat("SELLING_PRICE");
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return price;
+    }
+
+    public static void clear(){
+        quantity.clear();
+        saleList.clear();
+    }
+
+    public static float getSubTotal(){
+        float subTotal = 0;
+        for(int i = 0; i < saleList.size(); i++){
+            subTotal += saleList.get(i).getPrice();
+        }
+        return subTotal;
+    }
+
+    public static void remove(int indexID){
+        saleList.remove(indexID);
+        quantity.remove(indexID);
+    }
+
+
+
+    public static int doneSale(){
+
+        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
+        String user = "root";
+        String password = "HBdeLA@2004";
+
+        int doneSale =0;
 
         int saleID = 0;
         int productID = 0;
@@ -177,7 +311,7 @@ public class SellProductController {
                 Connection connection = DriverManager.getConnection(url, user, password);
                 PreparedStatement Statement;
 
-                Statement = connection.prepareStatement("INSERT INTO SALES VALUES (?, ?, ?, ?,?)");
+                Statement = connection.prepareStatement("INSERT INTO SALES VALUES (?, ?, ?, ?, ?, ?)");
                 LocalDateTime time = LocalDateTime.now();
                 Timestamp Time = Timestamp.valueOf(time);
                 Date date = new Date();
@@ -187,8 +321,8 @@ public class SellProductController {
                 Statement.setInt(2, productID);
                 Statement.setInt(3, quantity);
                 Statement.setFloat(4, total);
-                Statement.setTimestamp(4, Time);
-                Statement.setInt(5, saleID);
+                Statement.setTimestamp(5, Time);
+                Statement.setInt(6, saleID);
                 Statement.execute();
 
                 Statement = connection.prepareStatement("SELECT QUANTITY FROM STOCK WHERE PRODUCT_ID=?");
@@ -202,9 +336,15 @@ public class SellProductController {
                 Statement.setInt(1, currentQuantity - quantity);
                 Statement.setInt(2, productID);
                 Statement.execute();
+
+                doneSale = 1;
+
             }catch(Exception e){
                 e.printStackTrace();
+                doneSale = 0;
             }
+            setIncome(productID,quantity);
         }
+        return doneSale;
     }
 }

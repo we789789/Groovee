@@ -17,7 +17,6 @@ public class Sale {
         this.rate = rate;
         this.price = price;
         this.productName = productName;
-        this.productName = productName;
     }
 
 
