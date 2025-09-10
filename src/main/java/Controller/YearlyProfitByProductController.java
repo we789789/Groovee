@@ -17,22 +17,22 @@ public class YearlyProfitByProductController {
 
         yearlyIncomeByProduct.clear();
 
-        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
+        String url = "jdbc:sqlite:data.sqlite";
         String user = "root";
         String password = "HBdeLA@2004";
         int year;
         int productID = -1;
         String productName = "";
-        float sellingPrice = -1;
-        float purchasePrice= -1;
+        float sellingPrice = 0;
+        float purchasePrice = 0;
         int quantity = 0;
         float income;
         totalIncome = 0;
 
         try{
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             PreparedStatement Statement;
 
             Statement = connection.prepareStatement("SELECT * FROM YEARLY_INCOME_BY_PRODUCT");
@@ -43,17 +43,18 @@ public class YearlyProfitByProductController {
                 productID = yearlyIncomeByProducts.getInt("PRODUCT_ID");
                 income = yearlyIncomeByProducts.getFloat("INCOME");
 
-                Statement = connection.prepareStatement("SELECT * FROM PRODUCTS WHERE PRODUCT_ID = ?");
+                Statement = connection.prepareStatement("SELECT * FROM PRODUCTS WHERE CAST(PRODUCT_ID AS INTEGER) = ?");
                 Statement.setInt(1, productID);
                 ResultSet yearlyIncomeByProductsDetails = Statement.executeQuery();
 
                 if(yearlyIncomeByProductsDetails.next()) {
+
                     productName = yearlyIncomeByProductsDetails.getString("NAME");
                     sellingPrice = yearlyIncomeByProductsDetails.getFloat("SELLING_PRICE");
                     purchasePrice = yearlyIncomeByProductsDetails.getFloat("PURCHASE_PRICE");
                 }
 
-                Statement = connection.prepareStatement("SELECT QUANTITY FROM STOCK WHERE PRODUCT_ID = ?");
+                Statement = connection.prepareStatement("SELECT QUANTITY FROM STOCK WHERE CAST(PRODUCT_ID AS INTEGER) = ?");
                 Statement.setInt(1, productID);
                 ResultSet stock = Statement.executeQuery();
 
@@ -68,8 +69,6 @@ public class YearlyProfitByProductController {
 
                 productID = -1;
                 productName = "";
-                sellingPrice = -1;
-                purchasePrice= -1;
                 quantity = 0;
                 income =0;
             }
@@ -86,7 +85,7 @@ public class YearlyProfitByProductController {
 
         yearlyIncomeByProduct.clear();
 
-        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
+        String url = "jdbc:sqlite:data.sqlite";
         String user = "root";
         String password = "HBdeLA@2004";
         int year = -1;
@@ -99,11 +98,11 @@ public class YearlyProfitByProductController {
 
         try{
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             PreparedStatement Statement;
 
-            Statement = connection.prepareStatement("SELECT * FROM PRODUCTS  WHERE NAME Like ?");
+            Statement = connection.prepareStatement("SELECT * FROM PRODUCTS WHERE NAME Like ?");
             Statement.setString(1,"%"+productName+"%");
             ResultSet yearlyIncomeByProducts = Statement.executeQuery();
 
@@ -113,7 +112,7 @@ public class YearlyProfitByProductController {
                 sellingPrice = yearlyIncomeByProducts.getFloat("SELLING_Price");
                 purchasePrice = yearlyIncomeByProducts.getFloat("PURCHASE_Price");
 
-                Statement = connection.prepareStatement("SELECT * FROM YEARLY_INCOME_BY_PRODUCT Where PRODUCT_ID = ?");
+                Statement = connection.prepareStatement("SELECT * FROM YEARLY_INCOME_BY_PRODUCT Where CAST(PRODUCT_ID AS INTEGER) = ?");
                 Statement.setInt(1, productID);
                 ResultSet YearlyIncomeByProducts = Statement.executeQuery();
                 while(YearlyIncomeByProducts.next()){
@@ -121,7 +120,7 @@ public class YearlyProfitByProductController {
                     year = YearlyIncomeByProducts.getInt("YEAR");
                     income = YearlyIncomeByProducts.getFloat("INCOME");
 
-                    Statement = connection.prepareStatement("SELECT QUANTITY FROM STOCK WHERE PRODUCT_ID = ?");
+                    Statement = connection.prepareStatement("SELECT QUANTITY FROM STOCK WHERE CAST(PRODUCT_ID AS INTEGER) = ?");
                     Statement.setInt(1, productID);
                     ResultSet stock = Statement.executeQuery();
 

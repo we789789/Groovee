@@ -17,33 +17,32 @@ public class DailyProfitByProductController {
     public static void setDailyIncomeByProduct() {
         dailyIncomeByProduct.clear();
 
-        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
-        String user = "root";
-        String password = "HBdeLA@2004";
+        String url = "jdbc:sqlite:data.sqlite";
+
         int productID = -1;
         String productName = "";
         float sellingPrice = -1;
         float purchasePrice= -1;
         int quantity = 0;
         float income;
-        LocalDate date = null;
+        String date = null;
         totalIncome = 0;
 
         try{
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             PreparedStatement Statement;
 
             Statement = connection.prepareStatement("SELECT * FROM INCOME");
             ResultSet dailyIncomeByProducts = Statement.executeQuery();
 
             while(dailyIncomeByProducts.next()){
-                date = dailyIncomeByProducts.getDate("DATE").toLocalDate();
+                date = dailyIncomeByProducts.getString("DATE");
                 productID = dailyIncomeByProducts.getInt("PRODUCT_ID");
                 income = dailyIncomeByProducts.getFloat("INCOME");
 
-                Statement = connection.prepareStatement("SELECT * FROM PRODUCTS WHERE PRODUCT_ID = ?");
+                Statement = connection.prepareStatement("SELECT * FROM PRODUCTS WHERE CAST(PRODUCT_ID AS INTEGER) = ?");
                 Statement.setInt(1, productID);
                 ResultSet dailyIncomeByProductsDetails = Statement.executeQuery();
 
@@ -52,14 +51,16 @@ public class DailyProfitByProductController {
                     sellingPrice = dailyIncomeByProductsDetails.getFloat("SELLING_PRICE");
                     purchasePrice = dailyIncomeByProductsDetails.getFloat("PURCHASE_PRICE");
                 }
+                dailyIncomeByProductsDetails.close();
 
-                Statement = connection.prepareStatement("SELECT QUANTITY FROM STOCK WHERE PRODUCT_ID = ?");
+                Statement = connection.prepareStatement("SELECT QUANTITY FROM STOCK WHERE CAST(PRODUCT_ID AS INTEGER) = ?");
                 Statement.setInt(1, productID);
                 ResultSet stock = Statement.executeQuery();
 
                 if(stock.next()){
                     quantity = stock.getInt("QUANTITY");
                 }
+                stock.close();
 
                 totalIncome += income;
                 dailyIncomeByProduct.add(new DailyProfitByProduct(productID, productName, purchasePrice, sellingPrice, quantity, date, income));
@@ -72,6 +73,7 @@ public class DailyProfitByProductController {
                 income =0;
                 date = null;
             }
+            dailyIncomeByProducts.close();
             Statement.close();
             connection.close();
 
@@ -84,21 +86,20 @@ public class DailyProfitByProductController {
     public static void setDailyIncomeByProduct(String productName) {
         dailyIncomeByProduct.clear();
 
-        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
-        String user = "root";
-        String password = "HBdeLA@2004";
+        String url = "jdbc:sqlite:data.sqlite";
+
         int productID = -1;
         float sellingPrice = -1;
         float purchasePrice= -1;
         int quantity = 0;
         float income;
-        LocalDate date = null;
+        String date = null;
         totalIncome = 0;
 
         try{
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             PreparedStatement Statement;
 
             Statement = connection.prepareStatement("SELECT * FROM PRODUCTS  WHERE NAME Like ?");
@@ -111,14 +112,14 @@ public class DailyProfitByProductController {
                 sellingPrice = products.getFloat("SELLING_Price");
                 purchasePrice = products.getFloat("PURCHASE_Price");
 
-                Statement = connection.prepareStatement("SELECT * FROM INCOME Where PRODUCT_ID = ?");
+                Statement = connection.prepareStatement("SELECT * FROM INCOME Where CAST(PRODUCT_ID AS INTEGER) = ?");
                 Statement.setInt(1, productID);
                 ResultSet dailyIncomeByProducts = Statement.executeQuery();
                 while(dailyIncomeByProducts.next()){
-                    date = dailyIncomeByProducts.getDate("DATE").toLocalDate();
+                    date = dailyIncomeByProducts.getString("DATE");
                     income = dailyIncomeByProducts.getFloat("INCOME");
 
-                    Statement = connection.prepareStatement("SELECT QUANTITY FROM STOCK WHERE PRODUCT_ID = ?");
+                    Statement = connection.prepareStatement("SELECT QUANTITY FROM STOCK WHERE CAST(PRODUCT_ID AS INTEGER) = ?");
                     Statement.setInt(1, productID);
                     ResultSet stock = Statement.executeQuery();
 
@@ -128,18 +129,17 @@ public class DailyProfitByProductController {
                     }
                     totalIncome += income;
                     dailyIncomeByProduct.add(new DailyProfitByProduct(productID, productName, purchasePrice, sellingPrice, quantity, date, income));
+                    stock.close();
 
                     productID = -1;
                     productName = "";
                     sellingPrice = -1;
                     purchasePrice= -1;
-                    quantity = 0;
-                    income =0;
-                    date = null;
                 }
+                dailyIncomeByProducts.close();
 
             }
-
+            products.close();
             Statement.close();
             connection.close();
 

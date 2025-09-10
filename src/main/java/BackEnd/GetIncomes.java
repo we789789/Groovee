@@ -7,16 +7,14 @@ public class GetIncomes {
 
     PreparedStatement Statement;
 
-    String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
-    String user = "root";
-    String password = "HBdeLA@2004";
+    String url = "jdbc:sqlite:data.sqlite";
 
     public void getDailyIncomes(){
 
         try{
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             Statement = connection.prepareStatement("SELECT * FROM DAILY_INCOMES");
             ResultSet dailyIncomes = Statement.executeQuery();
 
@@ -38,8 +36,8 @@ public class GetIncomes {
 
         try{
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             Statement = connection.prepareStatement("SELECT * FROM INCOME");
             ResultSet dailyIncomesByProduct = Statement.executeQuery();
 
@@ -63,8 +61,8 @@ public class GetIncomes {
 
         try{
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             Statement = connection.prepareStatement("SELECT * FROM INCOME WHERE PRODUCT_ID = ?");
             Statement.setInt(1, productId);
             ResultSet dailyIncomesByProduct_Filter = Statement.executeQuery();
@@ -103,8 +101,8 @@ public class GetIncomes {
 
         try {
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             Statement = connection.prepareStatement("SELECT * FROM MONTHLY_INCOMES");
             ResultSet monthlyIncomes = Statement.executeQuery();
 
@@ -128,8 +126,8 @@ public class GetIncomes {
 
         try{
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             Statement = connection.prepareStatement("SELECT * FROM MONTHLY_INCOME_BY_PRODUCT");
             ResultSet monthlyIncomesByProduct = Statement.executeQuery();
 
@@ -156,8 +154,8 @@ public class GetIncomes {
 
         try{
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             Statement = connection.prepareStatement("SELECT * FROM MONTHLY_INCOME_BY_PRODUCT WHERE PRODUCT_ID = ?");
             Statement.setInt(1, productId);
             ResultSet monthlyIncomesByProduct_Filter = Statement.executeQuery();
@@ -196,8 +194,8 @@ public class GetIncomes {
 
         try {
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             Statement = connection.prepareStatement("SELECT * FROM YEARLY_INCOMES");
             ResultSet yearlyIncomes = Statement.executeQuery();
 
@@ -220,8 +218,8 @@ public class GetIncomes {
 
         try{
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             Statement = connection.prepareStatement("SELECT * FROM YEARLY_INCOME_BY_PRODUCT");
             ResultSet yearlyIncomesByProduct = Statement.executeQuery();
 
@@ -246,8 +244,8 @@ public class GetIncomes {
 
         try{
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             Statement statement = connection.prepareStatement("SELECT * FROM YEARLY_INCOME_BY_PRODUCT WHERE PRODUCT_ID = ?");
             Statement.setInt(1, productId);
             ResultSet yearlyIncomesByProduct_Filter = Statement.executeQuery();

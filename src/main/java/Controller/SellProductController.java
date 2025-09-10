@@ -26,18 +26,16 @@ public class SellProductController {
 
     public static void addSale(int saleID, int productID, int quantity) {
 
-        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
-        String user = "root";
-        String password = "HBdeLA@2004";
+        String url = "jdbc:sqlite:data.sqlite";
 
         String productName="";
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             PreparedStatement Statement;
 
-            Statement = connection.prepareStatement("SELECT SELLING_PRICE FROM products WHERE PRODUCT_ID=?");
+            Statement = connection.prepareStatement("SELECT SELLING_PRICE FROM products WHERE CAST(PRODUCT_ID AS INTEGER)=?");
             Statement.setInt(1, productID);
             ResultSet amount = Statement.executeQuery();
 
@@ -50,17 +48,20 @@ public class SellProductController {
 
 
 
-                Statement = connection.prepareStatement("SELECT NAME FROM PRODUCTS  WHERE PRODUCT_ID=?");
-                Statement.setInt(1, productID);
-                ResultSet name = Statement.executeQuery();
-                if (name.next()) {
-                    productName =  name.getString("NAME");
-                }else{
-                    System.out.println("Product not found.");
-                }
-                    saleList.add(new Sale(saleID, productID, quantity, rate, price, productName));
+            Statement = connection.prepareStatement("SELECT NAME FROM PRODUCTS  WHERE CAST(PRODUCT_ID AS INTEGER)=?");
+            Statement.setInt(1, productID);
+            ResultSet name = Statement.executeQuery();
+            if (name.next()) {
+                productName =  name.getString("NAME");
+            }else{
+                System.out.println("Product not found.");
+            }
+            name.close();
+            saleList.add(new Sale(saleID, productID, quantity, rate, price, productName));
 
-
+            amount.close();
+            Statement.close();
+            connection.close();
 
         }catch (Exception e){
             e.printStackTrace();
@@ -68,14 +69,12 @@ public class SellProductController {
     }
     public static void addSale(int saleID, String productName, int quantity) {
 
-        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
-        String user = "root";
-        String password = "HBdeLA@2004";
+        String url = "jdbc:sqlite:data.sqlite";
 
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             PreparedStatement Statement;
 
             Statement = connection.prepareStatement("SELECT PRODUCT_ID FROM PRODUCTS  WHERE NAME=?");
@@ -87,7 +86,7 @@ public class SellProductController {
                 System.out.println("Product not found.");
             }
 
-            Statement = connection.prepareStatement("SELECT SELLING_PRICE FROM products WHERE PRODUCT_ID=?");
+            Statement = connection.prepareStatement("SELECT SELLING_PRICE FROM products WHERE CAST(PRODUCT_ID AS INTEGER)=?");
             Statement.setInt(1, productID);
             ResultSet amount = Statement.executeQuery();
 
@@ -111,16 +110,14 @@ public class SellProductController {
 
     public static int getNewSaleID() {
 
-        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
-        String user = "root";
-        String password = "HBdeLA@2004";
+        String url = "jdbc:sqlite:data.sqlite";
 
         int LastSaleID = 0;
         String productName = "";
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             PreparedStatement Statement;
 
             Statement = connection.prepareStatement("SELECT SALE_ID FROM SALES");
@@ -129,6 +126,9 @@ public class SellProductController {
                 LastSaleID = existsSales.getInt("SALE_ID");
             }
             newSaleID = LastSaleID + 1;
+            existsSales.close();
+            Statement.close();
+            connection.close();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -139,15 +139,13 @@ public class SellProductController {
 
     public static ArrayList<String> getSuggestedNameList() {
 
-        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
-        String user = "root";
-        String password = "HBdeLA@2004";
+        String url = "jdbc:sqlite:data.sqlite";
 
         String productName = "";
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             PreparedStatement Statement;
 
 
@@ -171,18 +169,17 @@ public class SellProductController {
     }
 
     public static String getProductName(int productID) {
-        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
-        String user = "root";
-        String password = "HBdeLA@2004";
+
+        String url = "jdbc:sqlite:data.sqlite";
 
         String productName = "";
         try{
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             PreparedStatement Statement;
 
-            Statement = connection.prepareStatement("SELECT NAME FROM PRODUCTS WHERE PRODUCT_ID=?");
+            Statement = connection.prepareStatement("SELECT NAME FROM PRODUCTS WHERE CAST(PRODUCT_ID AS INTEGER)=?");
             Statement.setInt(1, productID);
             ResultSet name = Statement.executeQuery();
             if (name.next()) {
@@ -190,6 +187,9 @@ public class SellProductController {
             }else{
                 return "Product Not Found";
             }
+            name.close();
+            Statement.close();
+            connection.close();
 
 
         }catch(Exception e){
@@ -218,22 +218,25 @@ public class SellProductController {
 
 
     public static int getStock(int productID) {
-        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
-        String user = "root";
-        String password = "HBdeLA@2004";
+
+        String url = "jdbc:sqlite:data.sqlite";
         int stock = 0;
         try {
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             PreparedStatement Statement;
 
-            Statement = connection.prepareStatement("SELECT QUANTITY FROM STOCK WHERE PRODUCT_ID=?");
+            Statement = connection.prepareStatement("SELECT QUANTITY FROM STOCK WHERE CAST(PRODUCT_ID AS INTEGER)=?");
             Statement.setInt(1, productID);
             ResultSet stocks = Statement.executeQuery();
             if (stocks.next()) {
                 stock = stocks.getInt("QUANTITY");
             }
+            stocks.close();
+            Statement.close();
+            connection.close();
+
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -242,22 +245,24 @@ public class SellProductController {
     }
 
     public static float getPrice(int productID) {
+
         float price = 0;
-        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
-        String user = "root";
-        String password = "HBdeLA@2004";
+        String url = "jdbc:sqlite:data.sqlite";
 
         try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             PreparedStatement Statement;
 
-            Statement = connection.prepareStatement("SELECT SELLING_PRICE FROM PRODUCTS WHERE PRODUCT_ID=?");
+            Statement = connection.prepareStatement("SELECT SELLING_PRICE FROM PRODUCTS WHERE CAST(PRODUCT_ID AS INTEGER)=?");
             Statement.setInt(1, productID);
             ResultSet prices = Statement.executeQuery();
             if (prices.next()) {
                 price = prices.getFloat("SELLING_PRICE");
             }
+            prices.close();
+            Statement.close();
+            connection.close();
 
         }catch(Exception e){
             e.printStackTrace();
@@ -287,9 +292,7 @@ public class SellProductController {
 
     public static int doneSale(){
 
-        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
-        String user = "root";
-        String password = "HBdeLA@2004";
+        String url = "jdbc:sqlite:data.sqlite";;
 
         int doneSale =0;
 
@@ -307,37 +310,44 @@ public class SellProductController {
 
             try {
 
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection connection = DriverManager.getConnection(url, user, password);
+                Class.forName("org.sqlite.JDBC");
+                Connection connection = DriverManager.getConnection(url);
                 PreparedStatement Statement;
 
-                Statement = connection.prepareStatement("INSERT INTO SALES VALUES (?, ?, ?, ?, ?, ?)");
+                Statement = connection.prepareStatement("INSERT INTO SALES VALUES (?, ?, ?, ?, ?, ?,?)");
                 LocalDateTime time = LocalDateTime.now();
                 Timestamp Time = Timestamp.valueOf(time);
-                Date date = new Date();
-                java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
-                Statement.setDate(1, sqlDate);
+                int YYYY = time.getYear();
+                int MM = time.getMonthValue();
+                int DD = time.getDayOfMonth();
+
+                Statement.setString(1, String.valueOf(YYYY*1000+MM*100+DD));
                 Statement.setInt(2, productID);
                 Statement.setInt(3, quantity);
                 Statement.setFloat(4, total);
-                Statement.setTimestamp(5, Time);
+                Statement.setString(5, String.valueOf(Time));
                 Statement.setInt(6, saleID);
+                Statement.setInt(7, YYYY*1000+MM*100+DD);
                 Statement.execute();
 
-                Statement = connection.prepareStatement("SELECT QUANTITY FROM STOCK WHERE PRODUCT_ID=?");
+                Statement = connection.prepareStatement("SELECT QUANTITY FROM STOCK WHERE CAST(PRODUCT_ID AS INTEGER)=?");
                 Statement.setInt(1, productID);
                 ResultSet stock = Statement.executeQuery();
                 if (stock.next()) {
                     currentQuantity = stock.getInt("QUANTITY");
                 }
+                stock.close();
 
-                Statement = connection.prepareStatement("UPDATE STOCK SET QUANTITY=? WHERE PRODUCT_ID=?");
+                Statement = connection.prepareStatement("UPDATE STOCK SET QUANTITY=? WHERE CAST(PRODUCT_ID AS INTEGER)=?");
                 Statement.setInt(1, currentQuantity - quantity);
                 Statement.setInt(2, productID);
                 Statement.execute();
 
                 doneSale = 1;
+
+                Statement.close();
+                connection.close();
 
             }catch(Exception e){
                 e.printStackTrace();

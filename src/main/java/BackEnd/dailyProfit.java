@@ -3,17 +3,17 @@ package BackEnd;
 import java.time.LocalDate;
 
 public class dailyProfit {
-    LocalDate date;
+    String date;
     float dailyProfit;
 
-    public dailyProfit(LocalDate date, float dailyProfit) {
+    public dailyProfit(String date, float dailyProfit) {
         this.date = date;
         this.dailyProfit = dailyProfit;
     }
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
     public float getDailyProfit() {

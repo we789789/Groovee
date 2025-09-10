@@ -17,11 +17,11 @@ public class ProductDetailsController {
     }
 
     public static void setProductList(){
+
         productList.clear();
 
-        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
-        String user = "root";
-        String password = "HBdeLA@2004";
+        String url = "jdbc:sqlite:data.sqlite";
+
         int productID;
         String productName;
         float sellingPrice;
@@ -30,8 +30,8 @@ public class ProductDetailsController {
 
         try{
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             PreparedStatement Statement;
 
             Statement = connection.prepareStatement("SELECT * FROM PRODUCTS");
@@ -43,7 +43,7 @@ public class ProductDetailsController {
                 sellingPrice = products.getFloat("SELLING_Price");
                 purchasePrice = products.getFloat("PURCHASE_Price");
 
-                Statement = connection.prepareStatement("SELECT QUANTITY FROM STOCK WHERE PRODUCT_ID = ?");
+                Statement = connection.prepareStatement("SELECT QUANTITY FROM STOCK WHERE CAST(PRODUCT_ID AS INTEGER) = ?");
                 Statement.setInt(1, productID);
                 ResultSet stock = Statement.executeQuery();
 
@@ -55,6 +55,7 @@ public class ProductDetailsController {
 
                 productList.add(new Product(productID, productName, purchasePrice, sellingPrice, quantity));
             }
+            products.close();
             Statement.close();
             connection.close();
 
@@ -64,11 +65,11 @@ public class ProductDetailsController {
     }
 
     public static void setProductList(String searchTerm){
+
         productList.clear();
 
-        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
-        String user = "root";
-        String password = "HBdeLA@2004";
+        String url = "jdbc:sqlite:data.sqlite";
+
         int productID;
         String productName;
         float sellingPrice;
@@ -77,8 +78,8 @@ public class ProductDetailsController {
 
         try{
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             PreparedStatement Statement;
 
             Statement = connection.prepareStatement("SELECT * FROM PRODUCTS  WHERE NAME Like ?");
@@ -91,7 +92,7 @@ public class ProductDetailsController {
                 sellingPrice = products.getFloat("SELLING_Price");
                 purchasePrice = products.getFloat("PURCHASE_Price");
 
-                Statement = connection.prepareStatement("SELECT QUANTITY FROM STOCK WHERE PRODUCT_ID = ?");
+                Statement = connection.prepareStatement("SELECT QUANTITY FROM STOCK WHERE CAST(PRODUCT_ID AS INTEGER) = ?");
                 Statement.setInt(1, productID);
                 ResultSet stock = Statement.executeQuery();
 
@@ -103,6 +104,7 @@ public class ProductDetailsController {
 
                 productList.add(new Product(productID, productName, purchasePrice, sellingPrice, quantity));
             }
+            products.close();
             Statement.close();
             connection.close();
 

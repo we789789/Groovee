@@ -14,7 +14,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/MainForm.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/newMainMenu.fxml"));
 
         try{
 
