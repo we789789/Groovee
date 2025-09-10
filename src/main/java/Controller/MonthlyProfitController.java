@@ -18,9 +18,7 @@ public class MonthlyProfitController {
         monthlyProfits.clear();
         totalProfit = 0;
 
-        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
-        String user = "root";
-        String password = "HBdeLA@2004";
+        String url = "jdbc:sqlite:data.sqlite";
 
         int year;
         int month;
@@ -28,8 +26,8 @@ public class MonthlyProfitController {
 
         try {
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             PreparedStatement Statement;
 
             Statement = connection.prepareStatement("SELECT * FROM MONTHLY_INCOMES");
@@ -43,6 +41,8 @@ public class MonthlyProfitController {
 
                 monthlyProfits.add(new  MonthlyProfit(year,month,profit));
             }
+            monthlyProfit.close();
+            Statement.close();
 
         }catch(Exception e){
             System.out.println("Connection Failed! Check output console");
@@ -54,9 +54,7 @@ public class MonthlyProfitController {
         monthlyProfits.clear();
         totalProfit = 0;
 
-        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
-        String user = "root";
-        String password = "HBdeLA@2004";
+        String url = "jdbc:sqlite:data.sqlite";
 
         int filterYear1 = date1.getYear();
         int filterMonth1 = date1.getMonthValue();
@@ -69,13 +67,13 @@ public class MonthlyProfitController {
 
         try {
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             PreparedStatement Statement;
 
-            Statement = connection.prepareStatement("SELECT * FROM MONTHLY_INCOMES WHERE FILTER BETWEEN ? AND ?");
-            Statement.setInt(1, filterYear1*filterMonth1);
-            Statement.setInt(2, filterYear2*filterMonth2);
+            Statement = connection.prepareStatement("SELECT * FROM MONTHLY_INCOMES WHERE CAST(FILTER AS INTEGER) BETWEEN ? AND ?");
+            Statement.setInt(1, filterYear1*100+filterMonth1);
+            Statement.setInt(2, filterYear2*100+filterMonth2);
             ResultSet monthlyProfit = Statement.executeQuery();
 
             while (monthlyProfit.next()) {
@@ -87,6 +85,9 @@ public class MonthlyProfitController {
 
                 monthlyProfits.add(new MonthlyProfit(year, month, profit));
             }
+            monthlyProfit.close();
+            Statement.close();
+            connection.close();
 
         }catch(Exception e){
             System.out.println("Connection Failed! Check output console");

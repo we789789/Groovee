@@ -17,9 +17,7 @@ public class MonthlyProfitByProductController {
 
         monthlyIncomeByProduct.clear();
 
-        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
-        String user = "root";
-        String password = "HBdeLA@2004";
+        String url = "jdbc:sqlite:data.sqlite";
         int year;
         int month;
         int productID = -1;
@@ -32,8 +30,8 @@ public class MonthlyProfitByProductController {
 
         try{
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             PreparedStatement Statement;
 
             Statement = connection.prepareStatement("SELECT * FROM MONTHLY_INCOME_BY_PRODUCT");
@@ -45,7 +43,7 @@ public class MonthlyProfitByProductController {
                 productID = monthlyIncomeByProducts.getInt("PRODUCT_ID");
                 income = monthlyIncomeByProducts.getFloat("INCOME");
 
-                Statement = connection.prepareStatement("SELECT * FROM PRODUCTS WHERE PRODUCT_ID = ?");
+                Statement = connection.prepareStatement("SELECT * FROM PRODUCTS WHERE CAST(PRODUCT_ID AS INTEGER) = ?");
                 Statement.setInt(1, productID);
                 ResultSet dailyIncomeByProductsDetails = Statement.executeQuery();
 
@@ -54,25 +52,27 @@ public class MonthlyProfitByProductController {
                     sellingPrice = dailyIncomeByProductsDetails.getFloat("SELLING_PRICE");
                     purchasePrice = dailyIncomeByProductsDetails.getFloat("PURCHASE_PRICE");
                 }
+                dailyIncomeByProductsDetails.close();
 
-                Statement = connection.prepareStatement("SELECT QUANTITY FROM STOCK WHERE PRODUCT_ID = ?");
+                Statement = connection.prepareStatement("SELECT QUANTITY FROM STOCK WHERE CAST(PRODUCT_ID AS INTEGER) = ?");
                 Statement.setInt(1, productID);
                 ResultSet stock = Statement.executeQuery();
 
                 if(stock.next()){
                     quantity = stock.getInt("QUANTITY");
                 }
+                stock.close();
 
                 totalIncome += income;
                 monthlyIncomeByProduct.add(new MonthlyProfitByProduct(productID, productName, purchasePrice, sellingPrice, quantity, income, month, year));
 
-                productID = -1;
                 productName = "";
                 sellingPrice = -1;
                 purchasePrice= -1;
                 quantity = 0;
-                income =0;
+
             }
+            monthlyIncomeByProducts.close();
             Statement.close();
             connection.close();
 
@@ -86,9 +86,8 @@ public class MonthlyProfitByProductController {
 
         monthlyIncomeByProduct.clear();
 
-        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
-        String user = "root";
-        String password = "HBdeLA@2004";
+        String url = "jdbc:sqlite:data.sqlite";
+
         int year = -1;
         int month = -1;
         int productID = -1;
@@ -100,8 +99,8 @@ public class MonthlyProfitByProductController {
 
         try{
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             PreparedStatement Statement;
 
             Statement = connection.prepareStatement("SELECT * FROM PRODUCTS  WHERE NAME Like ?");
@@ -114,7 +113,7 @@ public class MonthlyProfitByProductController {
                 sellingPrice = monthlyIncomeByProducts.getFloat("SELLING_Price");
                 purchasePrice = monthlyIncomeByProducts.getFloat("PURCHASE_Price");
 
-                Statement = connection.prepareStatement("SELECT * FROM MONTHLY_INCOME_BY_PRODUCT Where PRODUCT_ID = ?");
+                Statement = connection.prepareStatement("SELECT * FROM MONTHLY_INCOME_BY_PRODUCT Where CAST(PRODUCT_ID AS INTEGER) = ?");
                 Statement.setInt(1, productID);
                 ResultSet dailyIncomeByProducts = Statement.executeQuery();
                 while(dailyIncomeByProducts.next()){
@@ -123,7 +122,7 @@ public class MonthlyProfitByProductController {
                     month = dailyIncomeByProducts.getInt("MONTH");
                     income = dailyIncomeByProducts.getFloat("INCOME");
 
-                    Statement = connection.prepareStatement("SELECT QUANTITY FROM STOCK WHERE PRODUCT_ID = ?");
+                    Statement = connection.prepareStatement("SELECT QUANTITY FROM STOCK WHERE CAST(PRODUCT_ID AS INTEGER) = ?");
                     Statement.setInt(1, productID);
                     ResultSet stock = Statement.executeQuery();
 
@@ -131,6 +130,7 @@ public class MonthlyProfitByProductController {
                     if(stock.next()){
                         quantity = stock.getInt("quantity");
                     }
+                    stock.close();
                     totalIncome += income;
                     monthlyIncomeByProduct.add(new MonthlyProfitByProduct(productID, productName, purchasePrice, sellingPrice, quantity, income, month, year));
 
@@ -138,11 +138,12 @@ public class MonthlyProfitByProductController {
                     productName = "";
                     sellingPrice = -1;
                     purchasePrice= -1;
-                    quantity = 0;
-                    income =0;
+
                 }
+                dailyIncomeByProducts.close();
 
             }
+            monthlyIncomeByProducts.close();
             Statement.close();
             connection.close();
 

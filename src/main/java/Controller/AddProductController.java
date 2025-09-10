@@ -4,9 +4,6 @@ import BackEnd.Product;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Scanner;
-
 
 public class AddProductController {
 
@@ -18,21 +15,15 @@ public class AddProductController {
 
     public static String addProduct(int productID, String productName, float sellingPrice, float purchasePrice, int quantity) {
 
-
-        Scanner scanner = new Scanner(System.in);
-        Date date = new Date();
-        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         PreparedStatement Statement;
 
-        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
-        String user = "root";
-        String password = "HBdeLA@2004";
+        String url = "jdbc:sqlite:data.sqlite";
         String output;
 
         try {
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
 
 
             //  -----------Add PRODUCTS TO DATABASE----------- //
@@ -63,6 +54,7 @@ public class AddProductController {
                 Statement.executeUpdate();
 
             setProductList();
+            connection.close();
 
         } catch (Exception e) {
             System.out.println(e);
@@ -74,9 +66,8 @@ public class AddProductController {
     public static void setProductList(){
         productList.clear();
 
-        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
-        String user = "root";
-        String password = "HBdeLA@2004";
+        String url = "jdbc:sqlite:data.sqlite";
+
         int productID;
         String productName;
         float sellingPrice;
@@ -85,8 +76,8 @@ public class AddProductController {
 
         try{
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             PreparedStatement Statement;
 
             Statement = connection.prepareStatement("SELECT * FROM PRODUCTS");

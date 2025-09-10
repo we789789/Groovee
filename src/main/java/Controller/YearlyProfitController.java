@@ -19,7 +19,7 @@ public class YearlyProfitController {
         yearlyProfits.clear();
         totalProfit = 0;
 
-        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
+        String url = "jdbc:sqlite:data.sqlite";
         String user = "root";
         String password = "HBdeLA@2004";
 
@@ -28,8 +28,8 @@ public class YearlyProfitController {
 
         try {
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             PreparedStatement Statement;
 
             Statement = connection.prepareStatement("SELECT * FROM YEARLY_INCOMES");
@@ -53,7 +53,7 @@ public class YearlyProfitController {
         yearlyProfits.clear();
         totalProfit = 0;
 
-        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
+        String url = "jdbc:sqlite:data.sqlite";
         String user = "root";
         String password = "HBdeLA@2004";
 
@@ -65,11 +65,11 @@ public class YearlyProfitController {
 
         try {
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             PreparedStatement Statement;
 
-            Statement = connection.prepareStatement("SELECT * FROM YEARLY_INCOMES WHERE FILTER BETWEEN ? AND ?");
+            Statement = connection.prepareStatement("SELECT * FROM YEARLY_INCOMES WHERE CAST(YEAR AS INTEGER) BETWEEN ? AND ?");
             Statement.setInt(1, filterYear1);
             Statement.setInt(2, filterYear2);
             ResultSet monthlyProfit = Statement.executeQuery();

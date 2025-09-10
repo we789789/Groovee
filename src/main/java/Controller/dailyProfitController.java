@@ -1,7 +1,6 @@
 package Controller;
 
 import BackEnd.dailyProfit;
-import com.mysql.cj.protocol.Resultset;
 
 import java.sql.*;
 
@@ -21,29 +20,30 @@ public class dailyProfitController {
         dailyProfits.clear();
         totalProfit = 0;
 
-        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
-        String user = "root";
-        String password = "HBdeLA@2004";
+        String url = "jdbc:sqlite:data.sqlite";
 
-        LocalDate date;
+        String date;
         float profit = 0;
 
         try {
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             PreparedStatement Statement;
 
             Statement = connection.prepareStatement("SELECT * FROM DAILY_INCOMES");
             ResultSet dailyProfit = Statement.executeQuery();
 
             while (dailyProfit.next()) {
-                date = dailyProfit.getDate("DATE").toLocalDate();
+                date = dailyProfit.getString("DATE");
                 profit = dailyProfit.getFloat("INCOME");
                 totalProfit += profit;
 
                 dailyProfits.add(new dailyProfit(date,profit));
             }
+            dailyProfit.close();
+            Statement.close();
+            connection.close();
 
         }catch(Exception e){
             System.out.println("Connection Failed! Check output console");
@@ -55,22 +55,25 @@ public class dailyProfitController {
         dailyProfits.clear();
         totalProfit = 0;
 
-        String url = "jdbc:mysql://localhost:3306/salesmanagementsystem";
-        String user = "root";
-        String password = "HBdeLA@2004";
+        String url = "jdbc:sqlite:data.sqlite";
 
         LocalDate date;
         float profit = 0;
 
         try {
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
             PreparedStatement Statement;
 
-            Statement = connection.prepareStatement("SELECT * FROM DAILY_INCOMES WHERE DATE BETWEEN ? AND ?");
-            Statement.setDate(1, java.sql.Date.valueOf(date1));
-            Statement.setDate(2, java.sql.Date.valueOf(date2));
+            Statement = connection.prepareStatement("SELECT * FROM DAILY_INCOMES WHERE FILTER BETWEEN ? AND ?");
+
+            int filter1 = date1.getYear()*10000+date1.getMonthValue()*100+date1.getDayOfMonth();
+            int filter2 = date2.getYear()*10000+date2.getMonthValue()*100+date2.getDayOfMonth();
+
+            Statement.setInt(1, filter1);
+            Statement.setInt(2, filter2);
+
             ResultSet dailyProfit = Statement.executeQuery();
 
             while (dailyProfit.next()) {
@@ -78,8 +81,11 @@ public class dailyProfitController {
                 profit = dailyProfit.getFloat("INCOME");
                 totalProfit += profit;
 
-                dailyProfits.add(new dailyProfit(date,profit));
+                dailyProfits.add(new dailyProfit(String.valueOf(date),profit));
             }
+            dailyProfit.close();
+            Statement.close();
+            connection.close();
 
         }catch(Exception e){
             System.out.println("Connection Failed! Check output console");

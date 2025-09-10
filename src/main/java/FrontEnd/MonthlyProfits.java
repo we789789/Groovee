@@ -72,6 +72,7 @@ public class MonthlyProfits {
         tbl_monthlyProfit.refresh();
 
         visualizeTableData();
+        lbl_monthlyTotalProfit.setText(String.valueOf(getTotalProfit()));
     }
 
 

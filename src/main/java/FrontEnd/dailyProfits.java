@@ -148,6 +148,8 @@ public class dailyProfits {
         tbl_dailyProfit.setItems(dailyProfitObservableList);
         tbl_dailyProfit.refresh();
         visualizeTableData();
+
+        lbl_dailyTotalProfit.setText(String.valueOf(getTotalProfit()));
     }
 
     @FXML

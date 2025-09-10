@@ -17,9 +17,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
-import static Controller.AddProductController.addProduct;
-import static Controller.AddProductController.setProductList;
+import static Controller.AddProductController.*;
+import static java.util.Collections.list;
 import static javafx.collections.FXCollections.observableArrayList;
+import static BackEnd.Product.*;
 
 public class AddProduct {
 
@@ -86,10 +87,20 @@ public class AddProduct {
         String sellingPrice = txt_sellingPrice.getText();
         String quantity = txt_quantity.getText();
 
+
         if (productId.isEmpty() || productName.isEmpty() || purchasePrice.isEmpty() ||
                 sellingPrice.isEmpty() || quantity.isEmpty()) {
             lbl_fail.setText("Please fill all fields");
             return;
+        }
+
+        for(int i = 0; i < products.size(); i++) {
+            ArrayList<Product> list;
+            list = products;
+            if(list.get(i).getProductId() == Integer.parseInt(productId)) {
+                lbl_fail.setText("Product with id " + productId + " already exists");
+                return;
+            }
         }
 
         int productIdInt = Integer.parseInt(productId);
@@ -124,28 +135,6 @@ public class AddProduct {
         col_productName.setCellValueFactory(new PropertyValueFactory<>("productName"));
 
 
-    }
-
-    @FXML
-    void btn_mainMenu(ActionEvent event) {
-        try {
-            Parent mainMenuView = FXMLLoader.load(getClass().getResource("/View/MainForm.fxml"));
-            mainPanel.getChildren().setAll(mainMenuView);
-
-            AnchorPane.setTopAnchor(mainMenuView, 0.0);
-            AnchorPane.setBottomAnchor(mainMenuView, 0.0);
-            AnchorPane.setLeftAnchor(mainMenuView, 0.0);
-            AnchorPane.setRightAnchor(mainMenuView, 0.0);
-
-            FadeTransition fadeIn = new FadeTransition(Duration.millis(500), mainMenuView);
-            fadeIn.setFromValue(0.0);
-            fadeIn.setToValue(1.0);
-            fadeIn.play();
-
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
     }
 
     @FXML

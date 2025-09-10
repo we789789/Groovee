@@ -34,11 +34,9 @@ public class Product{
     public int getProductId() {
         return productId;
     }
-
     public String getProductName() {
         return productName;
     }
-
     public float getPurchasePrice() {
         return purchasePrice;
     }
