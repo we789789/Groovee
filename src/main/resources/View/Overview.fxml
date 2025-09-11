@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725" prefWidth="1113.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.Overview">
+   <children>
+      <AnchorPane layoutX="70.0" layoutY="111.0" prefHeight="200.0" prefWidth="200.0" styleClass="anchorPane" stylesheets="@../StyleSheets/MainMenu.css">
+         <children>
+            <ImageView fitHeight="187.0" fitWidth="189.0" layoutX="6.0" layoutY="7.0" onMouseReleased="#profitByProduct" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/focus.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="343.0" layoutY="111.0" prefHeight="200.0" prefWidth="200.0" styleClass="anchorPane" stylesheets="@../StyleSheets/MainMenu.css">
+         <children>
+            <ImageView fitHeight="187.0" fitWidth="189.0" layoutX="7.0" layoutY="7.0" onMouseReleased="#overallProfit" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/dashboard.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="623.0" layoutY="111.0" prefHeight="200.0" prefWidth="200.0" styleClass="anchorPane" stylesheets="@../StyleSheets/MainMenu.css">
+         <children>
+            <ImageView fitHeight="187.0" fitWidth="189.0" layoutX="6.0" layoutY="7.0" onMouseReleased="#profitGraph" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/statistics.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Label layoutX="70.0" layoutY="55.0" text="Profit" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="72.0" layoutY="401.0" text="Sales" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="25.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="343.0" layoutY="450.0" prefHeight="200.0" prefWidth="200.0" styleClass="anchorPane" stylesheets="@../StyleSheets/MainMenu.css">
+         <children>
+            <ImageView fitHeight="187.0" fitWidth="189.0" layoutX="6.0" layoutY="7.0" onMouseReleased="#salesGraph" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/graph.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="71.0" layoutY="450.0" onMouseReleased="#salesTable" prefHeight="200.0" prefWidth="200.0" styleClass="anchorPane" stylesheets="@../StyleSheets/MainMenu.css">
+         <children>
+            <ImageView fitHeight="187.0" fitWidth="189.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/analytics.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Line endX="902.0" layoutX="155.0" layoutY="375.0" startX="-100.0" />
+      <Label layoutX="120.0" layoutY="326.0" text="Product Wise" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="419.0" layoutY="326.0" text="Overal" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="129.0" layoutY="664.0" text="Table View" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="388.0" layoutY="664.0" text="Graphical View" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="667.0" layoutY="326.0" text="Graphical View" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="17.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

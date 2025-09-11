@@ -1,0 +1,6 @@
+.anchorPane{
+    -fx-background-color: #1c1c3c;
+    -fx-border-color: white;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}

@@ -29,7 +29,6 @@ import javafx.stage.Stage;
 
 import static Controller.ProductDetailsController.setProductList;
 import static Controller.SellProductController.*;
-import static impl.org.controlsfx.ImplUtils.getChildren;
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class SellProduct {
@@ -41,7 +40,6 @@ public class SellProduct {
     }
     ObservableList<Sale> saleList = observableArrayList(tableData);
 
-    String name;
     int productID;
     int quantity;
     int invoiceNo = getNewSaleID();
@@ -140,7 +138,7 @@ public class SellProduct {
 
 
     @FXML
-    public void btn_productIDAdd(MouseEvent keyEvent) {
+    public void btn_productIDAdd(MouseEvent event) {
         if (Integer.parseInt(txt_quantity.getText()) <= availableStock(Integer.parseInt(txt_productID.getText()))) {
             productID = Integer.parseInt(txt_productID.getText());
             quantity = Integer.parseInt(txt_quantity.getText());
@@ -166,7 +164,7 @@ public class SellProduct {
     }
 
     @FXML
-    void btn_newSale(MouseEvent event) {
+    void btn_newSale(MouseEvent mouseEvent) {
         int out = doneSale();
         txt_productID.clear();
         txt_quantity.clear();
@@ -228,7 +226,7 @@ public class SellProduct {
     @FXML
     void btn_productID(KeyEvent event) {
 
-        if(txt_productID.getText().equals("") || txt_productID.getText() == null){
+        if(txt_productID.getText().isEmpty() || txt_productID.getText() == null){
             lbl_name.setText("");
             lbl_name2.setText("");
         }else {
@@ -236,7 +234,7 @@ public class SellProduct {
             lbl_name2.setText(getProductName(Integer.parseInt(txt_productID.getText())));
         }
 
-        if(txt_quantity.getText() != null || !txt_quantity.getText().equals("")) {
+        if(txt_quantity.getText() != null || !txt_quantity.getText().isEmpty()) {
             if(Integer.parseInt(txt_quantity.getText()) > availableStock(Integer.parseInt(txt_productID.getText()))) {
                 lbl_quantityStatus.setText("Quantity Exceeded");
                 lbl_nameQuantityStatus2.setText("Quantity Exceeded");
@@ -263,7 +261,7 @@ public class SellProduct {
             lbl_quantity2.setText("Invalid Quantity");
 
         }else{
-            if (txt_productID.getText() != null || !txt_productID.getText().equals("")) {
+            if (txt_productID.getText() != null || !txt_productID.getText().isEmpty()) {
                 if (Integer.parseInt(txt_quantity.getText()) > availableStock(Integer.parseInt(txt_productID.getText()))) {
                     lbl_quantityStatus.setText("Quantity Exceeded");
                     lbl_quantity.setText("Insufficient Stock");
@@ -343,6 +341,81 @@ public class SellProduct {
         return stock;
     }
 
+    public void productNames(KeyEvent mouseEvent) {
+        String searchTerm = txt_name2.getText();
+
+        if (searchTerm == null || searchTerm.isEmpty()) {
+            setProductList();
+            refreshSuggestList();
+
+        }else {
+            setProductList(searchTerm);
+            refreshSuggestList(searchTerm);
+        }
+    }
+
+    public void tblSelect(MouseEvent keyEvent) {
+        Product productID;
+        productID = productNames.getSelectionModel().getSelectedItem();
+        txt_productID.setText(String.valueOf(productID.getProductId()));
+
+        if(txt_productID.getText().isEmpty() || txt_productID.getText() == null){
+            lbl_name.setText("");
+            lbl_name2.setText("");
+        }else {
+            lbl_name.setText(getProductName(Integer.parseInt(txt_productID.getText())));
+            lbl_name2.setText(getProductName(Integer.parseInt(txt_productID.getText())));
+        }
+
+        if(txt_quantity.getText() != null || !txt_quantity.getText().isEmpty()) {
+            if(Integer.parseInt(txt_quantity.getText()) > availableStock(Integer.parseInt(txt_productID.getText()))) {
+                lbl_quantityStatus.setText("Quantity Exceeded");
+                lbl_nameQuantityStatus2.setText("Quantity Exceeded");
+            }else{
+                lbl_quantity.setText(txt_quantity.getText());
+                lbl_quantity2.setText(txt_quantity.getText());
+                lbl_total.setText(String.valueOf(Integer.parseInt(txt_quantity.getText())*getPrice(Integer.parseInt(txt_productID.getText()))));
+                lbl_total2.setText(String.valueOf(Integer.parseInt(txt_quantity.getText())*getPrice(Integer.parseInt(txt_productID.getText()))));
+                lbl_quantityStatus.setText("");
+                lbl_nameQuantityStatus2.setText("");
+            }
+        }
+
+    }
+
+    public void btn_idQuantity2(KeyEvent keyEvent) {
+        txt_quantity.setText(txt_quantity2.getText());
+        if(Integer.parseInt(txt_quantity.getText()) <= 0) {
+
+            lbl_quantityStatus.setText("Invalid Quantity");
+            lbl_nameQuantityStatus2.setText("Invalid Quantity");
+            lbl_quantity.setText("Invalid Quantity");
+            lbl_quantity2.setText("Invalid Quantity");
+
+        }else{
+            if (txt_productID.getText() != null || !txt_productID.getText().isEmpty()) {
+                if (Integer.parseInt(txt_quantity.getText()) > availableStock(Integer.parseInt(txt_productID.getText()))) {
+                    lbl_quantityStatus.setText("Quantity Exceeded");
+                    lbl_quantity.setText("Insufficient Stock");
+                    lbl_nameQuantityStatus2.setText("Quantity Exceeded");
+                    lbl_quantity2.setText("Insufficient Stock");
+                } else {
+                    lbl_quantity.setText(txt_quantity.getText());
+                    lbl_total.setText(String.valueOf(Integer.parseInt(txt_quantity.getText())*getPrice(Integer.parseInt(txt_productID.getText()))));
+                    lbl_quantityStatus.setText("");
+                    lbl_quantity2.setText(txt_quantity.getText());
+                    lbl_total2.setText(String.valueOf(Integer.parseInt(txt_quantity.getText())*getPrice(Integer.parseInt(txt_productID.getText()))));
+                    lbl_nameQuantityStatus2.setText("");
+                }
+            } else {
+                lbl_quantity.setText("");
+                lbl_quantityStatus.setText("");
+                lbl_quantity2.setText("");
+                lbl_nameQuantityStatus2.setText("");
+            }
+        }
+    }
+
     @FXML
     void initialize() {
         assert col_name != null : "fx:id=\"col_name\" was not injected: check your FXML file 'SellProduct.fxml'.";
@@ -379,78 +452,4 @@ public class SellProduct {
 
     }
 
-    public void productNames(KeyEvent mouseEvent) {
-        String searchTerm = txt_name2.getText();
-
-        if (searchTerm == null || searchTerm.isEmpty()) {
-            setProductList();
-            refreshSuggestList();
-
-        }else {
-            setProductList(searchTerm);
-            refreshSuggestList(searchTerm);
-        }
-    }
-
-    public void tblSelect(MouseEvent keyEvent) {
-        Product productID;
-        productID = productNames.getSelectionModel().getSelectedItem();
-        txt_productID.setText(String.valueOf(productID.getProductId()));
-
-        if(txt_productID.getText().equals("") || txt_productID.getText() == null){
-            lbl_name.setText("");
-            lbl_name2.setText("");
-        }else {
-            lbl_name.setText(getProductName(Integer.parseInt(txt_productID.getText())));
-            lbl_name2.setText(getProductName(Integer.parseInt(txt_productID.getText())));
-        }
-
-        if(txt_quantity.getText() != null || !txt_quantity.getText().equals("")) {
-            if(Integer.parseInt(txt_quantity.getText()) > availableStock(Integer.parseInt(txt_productID.getText()))) {
-                lbl_quantityStatus.setText("Quantity Exceeded");
-                lbl_nameQuantityStatus2.setText("Quantity Exceeded");
-            }else{
-                lbl_quantity.setText(txt_quantity.getText());
-                lbl_quantity2.setText(txt_quantity.getText());
-                lbl_total.setText(String.valueOf(Integer.parseInt(txt_quantity.getText())*getPrice(Integer.parseInt(txt_productID.getText()))));
-                lbl_total2.setText(String.valueOf(Integer.parseInt(txt_quantity.getText())*getPrice(Integer.parseInt(txt_productID.getText()))));
-                lbl_quantityStatus.setText("");
-                lbl_nameQuantityStatus2.setText("");
-            }
-        }
-
-    }
-
-    public void btn_idQuantity2(KeyEvent keyEvent) {
-        txt_quantity.setText(txt_quantity2.getText());
-        if(Integer.parseInt(txt_quantity.getText()) <= 0) {
-
-            lbl_quantityStatus.setText("Invalid Quantity");
-            lbl_nameQuantityStatus2.setText("Invalid Quantity");
-            lbl_quantity.setText("Invalid Quantity");
-            lbl_quantity2.setText("Invalid Quantity");
-
-        }else{
-            if (txt_productID.getText() != null || !txt_productID.getText().equals("")) {
-                if (Integer.parseInt(txt_quantity.getText()) > availableStock(Integer.parseInt(txt_productID.getText()))) {
-                    lbl_quantityStatus.setText("Quantity Exceeded");
-                    lbl_quantity.setText("Insufficient Stock");
-                    lbl_nameQuantityStatus2.setText("Quantity Exceeded");
-                    lbl_quantity2.setText("Insufficient Stock");
-                } else {
-                    lbl_quantity.setText(txt_quantity.getText());
-                    lbl_total.setText(String.valueOf(Integer.parseInt(txt_quantity.getText())*getPrice(Integer.parseInt(txt_productID.getText()))));
-                    lbl_quantityStatus.setText("");
-                    lbl_quantity2.setText(txt_quantity.getText());
-                    lbl_total2.setText(String.valueOf(Integer.parseInt(txt_quantity.getText())*getPrice(Integer.parseInt(txt_productID.getText()))));
-                    lbl_nameQuantityStatus2.setText("");
-                }
-            } else {
-                lbl_quantity.setText("");
-                lbl_quantityStatus.setText("");
-                lbl_quantity2.setText("");
-                lbl_nameQuantityStatus2.setText("");
-            }
-        }
-    }
 }

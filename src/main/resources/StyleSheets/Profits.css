@@ -72,4 +72,10 @@
 .scroll-bar:hover {
     -fx-opacity: 1;
 }
+.back{
+    -fx-text-fill: rgba(255,255,255,0.08);
+}
+.back:hover {
+    -fx-text-fill: white;
+}
 

@@ -113,6 +113,40 @@ public class ProductDetailsController {
         }
     }
 
+    public static int updateProduct(int productID, String productName, float sellingPrice, float purchasePrice, int quantity){
+
+        int result = 0;
+
+        try{
+            String url = "jdbc:sqlite:data.sqlite";
+
+            Class.forName("org.sqlite.JDBC");
+            Connection connection = DriverManager.getConnection(url);
+            PreparedStatement Statement;
+
+            Statement = connection.prepareStatement("UPDATE PRODUCTS SET NAME = ?, PURCHASE_PRICE = ?, SELLING_PRICE = ? WHERE CAST(PRODUCT_ID AS INTEGER) = ?");
+            Statement.setString(1,productName);
+            Statement.setFloat(2, sellingPrice);
+            Statement.setFloat(3, purchasePrice);
+            Statement.setInt(4, productID);
+            Statement.execute();
+
+            Statement = connection.prepareStatement("UPDATE STOCK SET QUANTITY = ? WHERE CAST(PRODUCT_ID AS INTEGER) = ?");
+            Statement.setInt(1, quantity);
+            Statement.setInt(2, productID);
+            Statement.execute();
+
+            Statement.close();
+            connection.close();
+
+            result = 1;
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public static ArrayList<Product> getProductList() {
         return productList;
     }
