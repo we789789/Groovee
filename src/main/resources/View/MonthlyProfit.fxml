@@ -66,6 +66,10 @@
                         <Font name="Segoe UI" size="17.0" />
                     </font>
                 </Label>
+                <Label layoutX="-13.0" layoutY="-23.0" onMouseReleased="#back" prefHeight="40.0" prefWidth="44.0" styleClass="back" stylesheets="@../StyleSheets/Profits.css" text="&lt;">
+               <font>
+                  <Font name="Consolas Bold" size="52.0" />
+               </font></Label>
             </children>
         </AnchorPane>
         <AnchorPane fx:id="tablePanel" layoutX="419.0" layoutY="19.0" prefHeight="698.0" prefWidth="682.0">
