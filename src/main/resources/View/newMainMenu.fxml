@@ -6,37 +6,72 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-    <AnchorPane fx:id="mainPanel" layoutX="316.0" layoutY="33.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="1115.0" styleClass="anchor-pane" stylesheets="@../StyleSheets/MainPanel.css">
+<AnchorPane fx:id="mainFrame" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="791.0" prefWidth="1461.0" style="-fx-background-color: #1c1c3c;" styleClass="main-frame" stylesheets="@../StyleSheets/MainPanel.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.Home">
+   <AnchorPane fx:id="mainPanel" layoutX="316.0" layoutY="33.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="1115.0" styleClass="anchor-pane" stylesheets="@../StyleSheets/MainPanel.css">
       <children>
-                  <image>
-                     <Image url="@../Images/warehouse.png" />
-                  </image>
-               </ImageView>
+         <AnchorPane layoutX="146.0" layoutY="63.0" prefHeight="210.0" prefWidth="210.0" styleClass="anchorPane" stylesheets="@../StyleSheets/MainMenu.css">
+            <children>
+               <ImageView fitHeight="191.0" fitWidth="195.0" layoutX="10.0" layoutY="10.0" onMouseReleased="#home" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.6; -fx-cursor: hand;">
                   <image>
                      <Image url="@../Images/home.png" />
                   </image>
                </ImageView>
+            </children>
+         </AnchorPane>
+         <AnchorPane layoutX="453.0" layoutY="63.0" prefHeight="210.0" prefWidth="210.0" styleClass="anchorPane" stylesheets="@../StyleSheets/MainMenu.css">
+            <children>
+               <ImageView id="img2" fitHeight="191.0" fitWidth="195.0" layoutX="10.0" layoutY="10.0" onMouseReleased="#sellProduct" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.6; -fx-cursor: hand;">
                   <image>
+                     <Image url="@../Images/price-tag.png" />
                   </image>
                </ImageView>
+            </children>
+         </AnchorPane>
+         <AnchorPane layoutX="772.0" layoutY="63.0" prefHeight="210.0" prefWidth="210.0" styleClass="anchorPane" stylesheets="@../StyleSheets/MainMenu.css">
+            <children>
+               <ImageView fitHeight="191.0" fitWidth="195.0" layoutX="10.0" layoutY="10.0" onMouseReleased="#addProduct" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.6; -fx-cursor: hand;">
                   <image>
+                     <Image url="@../Images/add-product.png" />
                   </image>
                </ImageView>
+            </children>
+         </AnchorPane>
+         <AnchorPane layoutX="146.0" layoutY="395.0" prefHeight="210.0" prefWidth="210.0" styleClass="anchorPane" stylesheets="@../StyleSheets/MainMenu.css">
+            <children>
+               <ImageView fitHeight="191.0" fitWidth="195.0" layoutX="10.0" layoutY="10.0" onMouseReleased="#overview" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.6; -fx-cursor: hand;">
                   <image>
+                     <Image url="@../Images/profits.png" />
                   </image>
                </ImageView>
+            </children>
+         </AnchorPane>
+         <AnchorPane layoutX="453.0" layoutY="395.0" prefHeight="210.0" prefWidth="210.0" styleClass="anchorPane" stylesheets="@../StyleSheets/MainMenu.css">
+            <children>
+               <ImageView fitHeight="191.0" fitWidth="195.0" layoutX="10.0" layoutY="10.0" onMouseReleased="#inventory" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.6; -fx-cursor: hand;">
+                  <image>
+                     <Image url="@../Images/warehouse.png" />
+                  </image>
+               </ImageView>
+            </children>
+         </AnchorPane>
+         <AnchorPane layoutX="781.0" layoutY="395.0" prefHeight="210.0" prefWidth="210.0" styleClass="anchorPane" stylesheets="@../StyleSheets/MainMenu.css">
+            <children>
+               <ImageView fitHeight="191.0" fitWidth="195.0" layoutX="10.0" layoutY="10.0" onMouseReleased="#update" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.6; -fx-cursor: hand;">
                   <image>
                      <Image url="@../Images/product-information.png" />
                   </image>
                </ImageView>
+            </children>
+         </AnchorPane>
       </children></AnchorPane>
    <AnchorPane layoutX="6.0" prefHeight="791.0" prefWidth="304.0">
       <children>
-          <Label fx:id="lbl1" layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="83.0" style="-fx-background-color: #ffffff; -fx-background-radius: 5px;" text="  GROOVEE">
-              <font>
-                  <Font name="Forte" size="16.0" />
-              </font>
-          </Label>
+         <Label fx:id="lbl1" layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="83.0" style="-fx-background-color: #ffffff; -fx-background-radius: 5px;" text="  GROOVEE">
+            <font>
+               <Font name="Forte" size="16.0" />
+            </font>
+         </Label>
+         <Label layoutX="9.0" layoutY="67.0" onMouseReleased="#home" prefHeight="71.0" prefWidth="301.0" stylesheets="@../StyleSheets/MainMenu.css" text="  Home" textFill="WHITE">
             <font>
                <Font name="Segoe UI" size="17.0" />
             </font>
@@ -48,6 +83,7 @@
                </ImageView>
             </graphic>
          </Label>
+         <Label layoutX="10.0" layoutY="137.0" onMouseReleased="#sellProduct" prefHeight="71.0" prefWidth="301.0" stylesheets="@../StyleSheets/MainMenu.css" text="  Sell Products" textFill="WHITE">
             <font>
                <Font name="Segoe UI" size="17.0" />
             </font>
@@ -59,6 +95,7 @@
                </ImageView>
             </graphic>
          </Label>
+         <Label layoutX="9.0" layoutY="207.0" onMouseReleased="#addProduct" prefHeight="71.0" prefWidth="301.0" stylesheets="@../StyleSheets/MainMenu.css" text="  Add Products" textFill="WHITE">
             <font>
                <Font name="Segoe UI" size="17.0" />
             </font>
@@ -70,6 +107,7 @@
                </ImageView>
             </graphic>
          </Label>
+         <Label layoutX="9.0" layoutY="277.0" onMouseReleased="#overview" prefHeight="71.0" prefWidth="301.0" stylesheets="@../StyleSheets/MainMenu.css" text="  Overview" textFill="WHITE">
             <font>
                <Font name="Segoe UI" size="17.0" />
             </font>
@@ -81,6 +119,7 @@
                </ImageView>
             </graphic>
          </Label>
+         <Label layoutX="9.0" layoutY="347.0" onMouseReleased="#inventory" prefHeight="71.0" prefWidth="301.0" stylesheets="@../StyleSheets/MainMenu.css" text="  Inventory" textFill="WHITE">
             <font>
                <Font name="Segoe UI" size="17.0" />
             </font>
@@ -92,6 +131,7 @@
                </ImageView>
             </graphic>
          </Label>
+         <Label layoutX="10.0" layoutY="418.0" onMousePressed="#update" prefHeight="71.0" prefWidth="301.0" stylesheets="@../StyleSheets/MainMenu.css" text="  Update" textFill="WHITE">
             <font>
                <Font name="Segoe UI" size="17.0" />
             </font>
