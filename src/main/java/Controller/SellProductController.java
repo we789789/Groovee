@@ -5,6 +5,8 @@ import BackEnd.Sale;
 import javafx.scene.control.TextField;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -315,18 +317,18 @@ public class SellProductController {
                 PreparedStatement Statement;
 
                 Statement = connection.prepareStatement("INSERT INTO SALES VALUES (?, ?, ?, ?, ?, ?,?)");
-                LocalDateTime time = LocalDateTime.now();
-                Timestamp Time = Timestamp.valueOf(time);
+                LocalDate date = LocalDate.now();
+                LocalTime time = LocalTime.now();
 
-                int YYYY = time.getYear();
-                int MM = time.getMonthValue();
-                int DD = time.getDayOfMonth();
+                int YYYY = date.getYear();
+                int MM = date.getMonthValue();
+                int DD = date.getDayOfMonth();
 
-                Statement.setString(1, String.valueOf(YYYY*1000+MM*100+DD));
+                Statement.setString(1, String.valueOf(date));
                 Statement.setInt(2, productID);
                 Statement.setInt(3, quantity);
                 Statement.setFloat(4, total);
-                Statement.setString(5, String.valueOf(Time));
+                Statement.setString(5, String.valueOf(time));
                 Statement.setInt(6, saleID);
                 Statement.setInt(7, YYYY*1000+MM*100+DD);
                 Statement.execute();

@@ -6,5 +6,13 @@
 .label:hover{
     -fx-background-color: rgba(0,0,0,0.1);
 }
-    -fx-padding: 10px;
+.anchorPane{
+    -fx-background-color: #1c1c3c;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-color: rgba(0,0,0,0.05);
+}
+.anchorPane:hover{
+    -fx-background-color: rgba(255,255,255,0.1);
+    -fx-border-color: white;
 }

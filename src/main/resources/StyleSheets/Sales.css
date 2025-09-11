@@ -1,0 +1,12 @@
+.anchor-pane{
+    -fx-background-radius: 10px;
+    -fx-background-color: #1c1c3c;
+    -fx-border-color: white;
+    -fx-border-radius: 10px;
+}
+.back{
+    -fx-text-fill: rgba(255,255,255,0.08);
+}
+.back:hover {
+    -fx-text-fill: white;
+}
