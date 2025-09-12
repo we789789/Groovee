@@ -75,7 +75,24 @@ public class Overview {
 
     @FXML
     void salesGraph(MouseEvent event) {
+        try {
+            Parent addProductView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/SalesGraphicalView.fxml")));
+            mainPanel.getChildren().setAll(addProductView);
 
+            AnchorPane.setTopAnchor(addProductView, 0.0);
+            AnchorPane.setBottomAnchor(addProductView, 0.0);
+            AnchorPane.setLeftAnchor(addProductView, 0.0);
+            AnchorPane.setRightAnchor(addProductView, 0.0);
+
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(500), addProductView);
+            fadeIn.setFromValue(0.0);
+            fadeIn.setToValue(1.0);
+            fadeIn.play();
+
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @FXML

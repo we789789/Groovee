@@ -1,5 +1,6 @@
 package Controller;
 
+import BackEnd.IntToMonth;
 import BackEnd.Quantity;
 import BackEnd.Sale;
 import javafx.scene.control.TextField;
@@ -324,6 +325,10 @@ public class SellProductController {
                 int MM = date.getMonthValue();
                 int DD = date.getDayOfMonth();
 
+                IntToMonth month = new IntToMonth(MM);
+                String mm = IntToMonth.getMonth();
+
+
                 Statement.setString(1, String.valueOf(date));
                 Statement.setInt(2, productID);
                 Statement.setInt(3, quantity);
@@ -345,6 +350,73 @@ public class SellProductController {
                 Statement.setInt(1, currentQuantity - quantity);
                 Statement.setInt(2, productID);
                 Statement.execute();
+
+                Statement = connection.prepareStatement("SELECT * FROM YEARLY_SALES WHERE YEAR = ?");
+                Statement.setInt(1, YYYY);
+                ResultSet yearlySales = Statement.executeQuery();
+                if (yearlySales.next()) {
+                    currentQuantity = yearlySales.getInt("QUANTITY") + 1;
+                    total = yearlySales.getFloat("INCOME") + total;
+                    Statement = connection.prepareStatement("UPDATE YEARLY_SALES SET INCOME=?, QUANTITY = ? WHERE YEAR = ?");
+                    Statement.setFloat(1, total);
+                    Statement.setInt(2, currentQuantity);
+                    Statement.setInt(3, YYYY);
+                    Statement.execute();
+                }else{
+                    Statement = connection.prepareStatement("INSERT INTO YEARLY_SALES VALUES (?, ?, ?)");
+                    Statement.setInt(1, YYYY);
+                    Statement.setInt(2, 1);
+                    Statement.setFloat(3, total);
+                    Statement.execute();
+                }
+
+                Statement = connection.prepareStatement("SELECT * FROM MONTHLY_SALES WHERE YEAR = ? AND MONTH = ?");
+                Statement.setInt(1, YYYY);
+                Statement.setString(2, mm);
+                ResultSet monthlySales = Statement.executeQuery();
+                if (monthlySales.next()) {
+                    currentQuantity = yearlySales.getInt("QUANTITY") + 1;
+                    total = monthlySales.getFloat("INCOME") + total;
+                    Statement = connection.prepareStatement("UPDATE MONTHLY_SALES SET INCOME=?, QUANTITY = ? WHERE YEAR = ? AND MONTH = ?");
+
+                    Statement.setFloat(1, total);
+                    Statement.setInt(2, currentQuantity);
+                    Statement.setInt(3, YYYY);
+                    Statement.setString(4, mm);
+                    Statement.execute();
+                }else{
+                    Statement = connection.prepareStatement("INSERT INTO MONTHLY_SALES VALUES (?, ?, ?, ?)");
+                    Statement.setInt(1, YYYY);
+                    Statement.setString(2, mm);
+                    Statement.setInt(3, 1);
+                    Statement.setFloat(4, total);
+                    Statement.execute();
+                }
+
+                Statement = connection.prepareStatement("SELECT * FROM DAILY_SALES WHERE YEAR = ? AND MONTH = ? AND QUANTITY = ?");
+                Statement.setInt(1, YYYY);
+                Statement.setString(2, mm);
+                Statement.setInt(3, DD);
+                ResultSet dailySales = Statement.executeQuery();
+                if (dailySales.next()) {
+                    currentQuantity = dailySales.getInt("QUANTITY") + 1;
+                    total = dailySales.getFloat("INCOME") + total;
+                    Statement = connection.prepareStatement("UPDATE DAILY_SALES SET INCOME=?, QUANTITY = ? WHERE YEAR = ? AND MONTH = ? AND DAY = ?");
+                    Statement.setFloat(1, total);
+                    Statement.setInt(2, currentQuantity);
+                    Statement.setInt(3, YYYY);
+                    Statement.setString(4, mm);
+                    Statement.setInt(5, DD);
+                    Statement.execute();
+                }else{
+                    Statement = connection.prepareStatement("INSERT INTO DAILY_SALES VALUES (?, ?, ?, ?, ?)");
+                    Statement.setInt(1, YYYY);
+                    Statement.setString(2, mm);
+                    Statement.setInt(3, DD);
+                    Statement.setInt(4, 1);
+                    Statement.setFloat(5, total);
+                    Statement.execute();
+                }
 
                 doneSale = 1;
 
