@@ -2,12 +2,12 @@ package BackEnd;
 
 public class DailySales {
     int year;
-    int month;
+    String month;
     int day;
     int quantity;
     float income;
 
-    public DailySales(int year, int month, int day, int quantity, float income) {
+    public DailySales(int year, String month, int day, int quantity, float income) {
         this.year = year;
         this.month = month;
         this.day = day;
@@ -21,18 +21,16 @@ public class DailySales {
     public void setYear(int year) {
         this.year = year;
     }
-    public int getMonth() {
+    public String getMonth() {
         return month;
     }
-    public void setMonth(int month) {
+    public void setMonth(String month) {
         this.month = month;
     }
     public int getDay() {
         return day;
     }
-    public void setDay(int day) {
-        this.day = day;
-    }
+    public void setDay(int day) {this.day = day;}
     public int getQuantity() {
         return quantity;
     }

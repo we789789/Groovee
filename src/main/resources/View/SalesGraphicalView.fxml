@@ -19,7 +19,7 @@
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <LineChart horizontalGridLinesVisible="false" layoutX="27.0" layoutY="62.0" prefHeight="570.0" prefWidth="777.0">
+                        <LineChart fx:id="lineChart" horizontalGridLinesVisible="false" layoutX="27.0" layoutY="62.0" prefHeight="570.0" prefWidth="777.0">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
                           </xAxis>
@@ -53,6 +53,7 @@
                                     <Font name="Segoe UI" size="14.0" />
                                  </font>
                               </Label>
+                              <Label fx:id="lbl_status" layoutX="52.0" layoutY="322.0" prefHeight="17.0" prefWidth="197.0" textFill="RED" />
                            </children>
                         </AnchorPane>
                      </children>
