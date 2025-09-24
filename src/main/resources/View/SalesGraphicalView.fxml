@@ -15,11 +15,11 @@
    <children>
       <TabPane layoutX="7.0" layoutY="39.0" prefHeight="679.0" prefWidth="1099.0" stylesheets="@../StyleSheets/TabPanel.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Untitled Tab 1">
+          <Tab text="Daily">
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <LineChart horizontalGridLinesVisible="false" layoutX="27.0" layoutY="62.0" prefHeight="570.0" prefWidth="777.0">
+                        <LineChart fx:id="lineChart" layoutX="27.0" layoutY="62.0" prefHeight="570.0" prefWidth="777.0">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
                           </xAxis>
@@ -27,11 +27,6 @@
                             <NumberAxis side="LEFT" />
                           </yAxis>
                         </LineChart>
-                        <Label layoutX="474.0" layoutY="20.0" text="Date Vs. No of Sales" textFill="WHITE">
-                           <font>
-                              <Font name="Segoe UI" size="17.0" />
-                           </font>
-                        </Label>
                         <AnchorPane layoutX="799.0" layoutY="64.0" prefHeight="567.0" prefWidth="286.0" stylesheets="@../StyleSheets/DatePicker.css">
                            <children>
                               <Label layoutX="120.0" layoutY="14.0" text="Filter" textFill="WHITE">
@@ -53,13 +48,86 @@
                                     <Font name="Segoe UI" size="14.0" />
                                  </font>
                               </Label>
+                              <Label fx:id="lbl_status" layoutX="52.0" layoutY="322.0" prefHeight="17.0" prefWidth="197.0" textFill="RED" />
                            </children>
                         </AnchorPane>
                      </children>
                   </AnchorPane>
                </content>
             </Tab>
-          <Tab text="Untitled Tab 2" />
+          <Tab text="Monthly">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <LineChart fx:id="lineChartMonthly" layoutX="27.0" layoutY="62.0" prefHeight="570.0" prefWidth="777.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </LineChart>
+                        <AnchorPane layoutX="799.0" layoutY="64.0" prefHeight="567.0" prefWidth="286.0" stylesheets="@../StyleSheets/DatePicker.css">
+                           <children>
+                              <Label layoutX="120.0" layoutY="14.0" text="Filter" textFill="WHITE">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                              <Button layoutX="67.0" layoutY="372.0" mnemonicParsing="false" onMouseReleased="#monthlyShow" prefHeight="38.0" prefWidth="175.0" stylesheets="@../StyleSheets/Button.css" text="Show" />
+                              <Button layoutX="67.0" layoutY="435.0" mnemonicParsing="false" onMouseReleased="#clear" prefHeight="38.0" prefWidth="175.0" stylesheets="@../StyleSheets/Button.css" text="Clear" />
+                              <ChoiceBox fx:id="MonthlyYear" layoutX="46.0" layoutY="114.0" prefHeight="31.0" prefWidth="199.0" />
+                              <Label layoutX="46.0" layoutY="97.0" text="Year :" textFill="WHITE">
+                                 <font>
+                                    <Font name="Segoe UI" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lbl_statusMonthly" layoutX="52.0" layoutY="322.0" prefHeight="17.0" prefWidth="197.0" textFill="RED" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </content></Tab>
+            <Tab text="Yearly">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <LineChart fx:id="lineChartYearly" layoutX="27.0" layoutY="62.0" prefHeight="570.0" prefWidth="777.0">
+                           <xAxis>
+                              <CategoryAxis side="BOTTOM" />
+                           </xAxis>
+                           <yAxis>
+                              <NumberAxis side="LEFT" />
+                           </yAxis>
+                        </LineChart>
+                        <AnchorPane layoutX="799.0" layoutY="64.0" prefHeight="567.0" prefWidth="286.0" stylesheets="@../StyleSheets/DatePicker.css">
+                           <children>
+                              <Label layoutX="120.0" layoutY="14.0" text="Filter" textFill="WHITE">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                              <Button layoutX="67.0" layoutY="372.0" mnemonicParsing="false" onMouseReleased="#yearlyShow" prefHeight="38.0" prefWidth="175.0" stylesheets="@../StyleSheets/Button.css" text="Show" />
+                              <Button layoutX="67.0" layoutY="435.0" mnemonicParsing="false" onMouseReleased="#clear" prefHeight="38.0" prefWidth="175.0" stylesheets="@../StyleSheets/Button.css" text="Clear" />
+                              <ChoiceBox fx:id="yearlyYearFrom" layoutX="46.0" layoutY="114.0" prefHeight="31.0" prefWidth="199.0" />
+                              <Label layoutX="46.0" layoutY="97.0" text="From" textFill="WHITE">
+                                 <font>
+                                    <Font name="Segoe UI" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lbl_statusYearly" layoutX="52.0" layoutY="322.0" prefHeight="17.0" prefWidth="197.0" textFill="RED" />
+                              <ChoiceBox fx:id="yearlyYearTo" layoutX="46.0" layoutY="202.0" prefHeight="31.0" prefWidth="199.0" />
+                              <Label layoutX="46.0" layoutY="184.0" text="To" textFill="WHITE">
+                                 <font>
+                                    <Font name="Segoe UI" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
         </tabs>
       </TabPane>
    </children>
