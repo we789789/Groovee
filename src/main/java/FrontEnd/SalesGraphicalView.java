@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import static Controller.SalesGraphicalViewController.*;
+import static java.lang.Float.parseFloat;
 
 public class SalesGraphicalView {
 
@@ -155,9 +156,35 @@ public class SalesGraphicalView {
     private void setLineChartData(){
 
         XYChart.Series<String, Float> series1 = new XYChart.Series<>();
+        int endDate;
+        if(month.getValue().equals(months[1]) ||
+                month.getValue().equals(months[3]) ||
+                month.getValue().equals(months[5]) ||
+                month.getValue().equals(months[7]) ||
+                month.getValue().equals(months[8]) ||
+                month.getValue().equals(months[10]) ||
+                month.getValue().equals(months[12])){
+            endDate = 31;
+        }else if(month.getValue().equals(months[2]) && year.getValue()%4 != 0){
+            endDate = 28;
+        }else if(month.getValue().equals(months[2]) && year.getValue()%4 == 0){
+            endDate = 29;
+        }else{
+            endDate = 30;
+        }
 
-        for(int i = 0; i < dailySaleList.size(); i++){
-            series1.getData().add(new XYChart.Data<>(String.valueOf(dailySaleList.get(i).getDay()), dailySaleList.get(i).getIncome()));
+        for(int i = 1; i <= endDate; i++) {
+            boolean found = false;
+            for (int j = 0; j < dailySaleList.size(); j++) {
+                if (dailySaleList.get(j).getDay() == i) {
+                    series1.getData().add(new XYChart.Data<>(String.valueOf(i), dailySaleList.get(j).getIncome()));
+                    found = true;
+                    break;
+                }
+            }
+            if(!found){
+                series1.getData().add(new XYChart.Data<>(String.valueOf(i), parseFloat("0")));
+            }
         }
 
         lineChart.getData().add(series1);
@@ -165,8 +192,19 @@ public class SalesGraphicalView {
     private void setLineChartMonthlyData(){
 
         XYChart.Series<String, Float> series1 = new XYChart.Series<>();
-        for(int i = 0; i < monthlySaleList.size(); i++){
-            series1.getData().add(new XYChart.Data<>(monthlySaleList.get(i).getMonth(), monthlySaleList.get(i).getIncome()));
+        for(int i=0; i<12; i++){
+            boolean found = false;
+
+            for (int j = 0; j < monthlySaleList.size(); j++) {
+                if (months[i].equals(monthlySaleList.get(j).getMonth())) {
+                    series1.getData().add(new XYChart.Data<>(monthlySaleList.get(j).getMonth(), monthlySaleList.get(j).getIncome()));
+                    found = true;
+                    break;
+                }
+            }
+            if(!found){
+                series1.getData().add(new XYChart.Data<>(months[i], parseFloat("0")));
+            }
         }
 
         lineChartMonthly.getData().add(series1);
@@ -175,8 +213,20 @@ public class SalesGraphicalView {
 
     private void setLineChartYearlyData(){
         XYChart.Series<String, Float> income = new XYChart.Series<>();
-        for(int i = 0; i < yearlySaleList.size(); i++){
-            income.getData().add(new XYChart.Data<>(String.valueOf(yearlySaleList.get(i).getYear()),yearlySaleList.get(i).getIncome()));
+        int year1 = yearlyYearFrom.getValue();
+        int year2 = yearlyYearTo.getValue();
+
+        for(int i=year1; i<=year2; i++){
+            boolean found = false;
+            for(int j = 0; j < yearlySaleList.size(); j++){
+                if(yearlySaleList.get(j).getYear() == i){
+                    income.getData().add(new XYChart.Data<>(String.valueOf(i), yearlySaleList.get(j).getIncome()));
+                    found = true;
+                    break;
+                }
+            }if(!found){
+                income.getData().add(new XYChart.Data<>(String.valueOf(i), parseFloat("0")));
+            }
         }
         lineChartYearly.getData().add(income);
 
